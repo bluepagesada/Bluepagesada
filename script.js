@@ -18,7 +18,7 @@ const categories = {
     wallets: "Wallets",
     infra: "Infrastructure & Dev Tools",
     nft: "NFT & Tokenization Platforms",
-    gaming: "Gaming & Metaverse",
+    government: "Government & Institutions",
     other: "Other Real-World Use Cases"
 };
 
@@ -26,7 +26,7 @@ let projects = [];
 
 fetch('projects.json')
     .then(r => {
-        if (!r.ok) throw new Error('projects.json not found or invalid');
+        if (!r.ok) throw new Error('Failed to load projects.json');
         return r.json();
     })
     .then(data => {
@@ -35,54 +35,87 @@ fetch('projects.json')
         const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
         document.getElementById('update-date').textContent = dateStr;
-        document.getElementById('project-count').textContent = `${count} projects`;
-        document.getElementById('searchInput').placeholder = `Search all ${count} projects...`;
+        document.getElementById('project-count').textContent = `${count} projects that actually matter`;
+        document.getElementById('searchInput').placeholder = `Search ${count} verified projects...`;
 
-        renderCategories();
+        renderHallOfFame();
+        renderTabs();
         setupSearch();
     })
     .catch(err => {
         console.error(err);
-        document.getElementById('projects').innerHTML = '<div class="alert alert-danger text-center">Failed to load projects.json – check console.</div>';
+        document.getElementById('projects').innerHTML = '<div class="alert alert-danger text-center">Failed to load projects.json – check console. Likely invalid JSON.</div>';
     });
 
-function renderCategories() {
-    const accordion = document.getElementById('categoryAccordion');
-    accordion.innerHTML = '';
+function renderHallOfFame() {
+    const featured = projects.filter(p => ["World Mobile","Minswap","Indigo Protocol","Liqwid Finance","NMKR","JPG.store","Atala PRISM","Lenfi","Book.io","Empowa","Orcfax","Tangible","Blockfrost","Lace Wallet","Eternl"].includes(p.name));
+    const container = document.getElementById('hallOfFame');
+    container.innerHTML = featured.map(p => `
+        <div class="col">
+            <div class="card h-100 project-card border-primary shadow-lg">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex align-items-center mb-3">
+                        ${p.logo ? `<img src="${p.logo}" alt="${p.name}" class="me-3 rounded" style="width:48px;height:48px;object-fit:contain;">` : `<div class="logo-circle me-3">${p.name[0]}</div>`}
+                        <h5 class="mb-0">${p.name}</h5>
+                    </div>
+                    <p class="small text-muted">${p.desc}</p>
+                    <div class="badges mb-3">${p.tags.map(t => `<span class="badge ${tagClasses[t] || 'badge-secondary'} me-1">${t}</span>`).join('')}</div>
+                    <div class="metrics">
+                        <small>${p.metrics}</small><br>
+                        <small>Proof: <a href="${p.proof}" target="_blank" class="text-primary">source ↗</a></small>
+                    </div>
+                    <a href="${p.link}" target="_blank" class="btn btn-primary btn-sm mt-auto">Visit →</a>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
 
-    Object.entries(categories).forEach(([key, title]) => {
+function renderTabs() {
+    const tabList = document.getElementById('categoryTabs');
+    const tabContent = document.getElementById('categoryTabContent');
+    tabList.innerHTML = '';
+    tabContent.innerHTML = '';
+
+    Object.entries(categories).forEach(([key, title], index) => {
         const filtered = projects.filter(p => p.cat === key);
         if (filtered.length === 0) return;
 
-        const item = document.createElement('div');
-        item.className = 'accordion-item';
-        item.innerHTML = `
-            <h2 class="accordion-header">
-                <button class="accordion-button fw-bold fs-4 ${key === 'depin' ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#cat-${key}">
-                    ${title} (${filtered.length})
-                </button>
-            </h2>
-            <div id="cat-${key}" class="accordion-collapse collapse ${key === 'depin' ? 'show' : ''}">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4">
-                    ${filtered.map(p => `
-                        <div class="col">
-                            <div class="card h-100 project-card">
-                                <div class="card-body">
-                                    <h5>${p.name}</h5>
-                                    <p class="text-muted small">${p.desc}</p>
-                                    <div class="mb-2">
-                                        ${p.tags.map(t => `<span class="badge ${tagClasses[t] || 'badge-defi'} me-1">${t}</span>`).join('')}
-                                    </div>
-                                    <a href="${p.link}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a>
-                                    ${p.twitter ? `<a href="https://twitter.com/${p.twitter}" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm ms-2"><i class="bi bi-twitter-x"></i></a>` : ''}
-                                </div>
+        // Create tab
+        const tab = document.createElement('li');
+        tab.className = 'nav-item';
+        tab.innerHTML = `<a class="nav-link ${index === 0 ? 'active' : ''}" data-bs-toggle="pill" href="#tab-${key}">${title} (${filtered.length})</a>`;
+        tabList.appendChild(tab);
+
+        // Create tab pane
+        const pane = document.createElement('div');
+        pane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
+        pane.id = `tab-${key}`;
+        pane.innerHTML = `<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4">
+            ${filtered.map(p => `
+                <div class="col">
+                    <div class="card h-100 project-card">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex align-items-center mb-3">
+                                ${p.logo ? `<img src="${p.logo}" alt="${p.name}" class="me-3 rounded" style="width:48px;height:48px;object-fit:contain;">` : `<div class="logo-circle me-3">${p.name[0]}</div>`}
+                                <h5 class="mb-0">${p.name}</h5>
+                            </div>
+                            <p class="small text-muted">${p.desc}</p>
+                            <div class="badges mb-3">${p.tags.map(t => `<span class="badge ${tagClasses[t] || 'badge-secondary'} me-1">${t}</span>`).join('')}</div>
+                            <div class="metrics">
+                                <small>${p.metrics}</small><br>
+                                <small>Proof: <a href="${p.proof}" target="_blank" class="text-primary">source ↗</a></small>
+                            </div>
+                            <div class="mt-auto pt-3">
+                                <a href="${p.link}" target="_blank" class="btn btn-primary btn-sm me-2">Visit</a>
+                                ${p.twitter ? `<a href="https://twitter.com/${p.twitter}" target="_blank" class="btn btn-outline-dark btn-sm"><i class="bi bi-twitter-x"></i></a>` : ''}
                             </div>
                         </div>
-                    `).join('')}
+                    </div>
                 </div>
-            </div>
-        `;
-        accordion.appendChild(item);
+            `).join('')}
+        </div>`;
+        tabContent.appendChild(pane);
     });
 }
 
@@ -96,6 +129,8 @@ function setupSearch() {
         });
     });
 }
+
+// Theme toggle, copy, visitor counter (same as before – copy from my last full version)
 
 const themeToggle = document.getElementById('themeToggle');
 if (localStorage.getItem('theme') === 'dark') {
