@@ -76,3 +76,4 @@
   {"name":"SERPRO Brazil","desc":"Brazilian government IT agency running Cardano nodes + RWA exploration","link":"https://serpro.gov.br","tags":["Government","Enterprise"],"cat":"government","logo":"https://serpro.gov.br/logo.png","proof":"https://serpro.gov.br/cardano","metrics":"Government node operator"},
   {"name":"Beefy Finance","desc":"Yield optimizer live on Cardano with real TVL","link":"https://beefy.com","tags":["Revenue"],"cat":"defi","logo":"https://beefy.com/logo.svg","proof":"https://defillama.com/protocol/beefy","metrics":"Live vaults"},
   
+]
