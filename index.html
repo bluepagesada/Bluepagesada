@@ -21,8 +21,8 @@
     <!-- Hero -->
     <section class="hero text-center">
         <div class="container">
-            <div class="mb-4 logo-svg">
-                <svg width="380" height="100" viewBox="0 0 380 100" xmlns="http://www.w3.org/2000/svg">
+            <div class="mb-5 logo-svg">
+                <svg class="img-fluid" viewBox="0 0 380 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                   <defs><linearGradient id="grad"><stop offset="0%" stop-color="#0033AD"/><stop offset="100%" stop-color="#00D4FF"/></linearGradient></defs>
                   <path d="M15 50 L50 28 L85 50 L50 72 Z" fill="url(#grad)" stroke="#0033AD" stroke-width="4"/>
                   <path d="M40 42 L50 55 L60 42 Z" fill="white"/>
@@ -30,8 +30,8 @@
                   <text x="215" y="65" font-size="52" font-weight="300" fill="white">Pages</text>
                 </svg>
             </div>
-            <p class="lead mb-4 fw-medium">The strict real-world Cardano directory.<br>Only projects with revenue, real users, or government/enterprise contracts. Nothing else.</p>
-            <p class="fs-5 mb-4">As of November 20, 2025 – <strong id="project-count">71 projects</strong> – curated daily</p>
+            <p class="lead mb-4 fw-medium">The strict real-world Cardano directory.<br class="d-none d-md-block">Only projects with revenue, real users, or government/enterprise contracts. Nothing else.</p>
+            <p class="fs-5 mb-4">As of <span id="update-date">November 20, 2025</span> – <strong id="project-count">71 projects</strong> – curated daily</p>
             <div>
                 <a href="#projects" class="btn btn-light btn-lg me-3">Explore Projects →</a>
                 <button class="btn btn-outline-light btn-lg me-3" data-bs-toggle="modal" data-bs-target="#submitModal">Submit Project</button>
@@ -92,7 +92,7 @@
                 <img src="https://api.qrserver.com/v1/create-qr-code/?data=addr1qx9c4qr8lpp73lxz2z80jgdme9ua22096d8kdhf0249jv5qgpe74yz745c80rht0pm0zrahhudcccgawzvxvg4lc59ks7fw8yq&size=220x220&margin=20" alt="Blue Pages ADA donation QR code" class="img-fluid" style="max-width:220px;">
             </p>
             <p>
-                Visitors: <span id="visitor-count">...</span> • <strong>@BluePagesADA</strong> • November 20, 2025<br>
+                Visitors: <span id="visitor-count">...</span> • <strong>@BluePagesADA</strong><br>
                 <small>The only Cardano directory that actually matters.</small>
             </p>
         </div>
