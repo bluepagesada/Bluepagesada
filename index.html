@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blue Pages – Yellow Pages for Cardano projects with real-world utility & revenue in 2025+. Only live, verified projects.">
+    <meta property="og:title" content="Blue Pages – Cardano Real-World Directory">
+    <meta property="og:description" content="Only Cardano projects that actually work in the real world. No hype. No memecoins.">
+    <meta property="og:image" content="https://i.imgur.com/2b5Z0eL.png">
+    <meta name="theme-color" content="#0068A5">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https:;">
+    <title>Blue Pages – Cardano Real-World Utility Directory</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root { --cardano-blue: #0033AD; }
+        body { background:#f8f9fa; font-family: 'Inter', system-ui, sans-serif; }
+        .hero { background: linear-gradient(135deg, #0033AD, #0068A5); color:white; padding: 5rem 0; }
+        .industry-header { background:var(--cardano-blue); color:white; }
+        .card { transition: transform .25s, box-shadow .25s; border: none; border-radius: 0.5rem; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.15); }
+        footer { background:#0033AD; color:white; padding: 4rem 0; }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold">Blue Pages</h1>
+            <p class="lead mb-4">Yellow Pages for Cardano projects that actually work in the real world.<br>Live revenue, real users, government contracts, enterprise adoption only.</p>
+            <p class="fs-5"> Curated for Adoption</p>
+            <a href="#industryAccordion" class="btn btn-light btn-lg me-3">Explore →</a>
+            <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#submitModal">Submit Project →</button>
+        </div>
+    </section>
+
+    <div class="container my-5">
+
+        <div class="alert alert-info text-center fw-bold">
+            Want your project listed? <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#submitModal">Submit for Review</button> – only verifiable real-world impact accepted.
+        </div>
+
+        <!-- Industries Accordion -->
+        <div class="accordion accordion-flush shadow-lg rounded" id="industryAccordion">
+
+            <!-- DePIN & Connectivity -->
+            <div class="accordion-item">
+                <h2 class="accordion-header industry-header rounded-top">
+                    <button class="accordion-button fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#depin">
+                        DePIN & Connectivity
+                    </button>
+                </h2>
+                <div id="depin" class="accordion-collapse collapse show">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4">
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5>World Mobile</h5>
+                                    <p>Planetary mobile network live in Africa & USA. Real SIM cards, revenue-sharing nodes.</p>
+                                    <a href="https://worldmobile.io" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a>
+                                    <a href="https://twitter.com/WorldMobileTeam" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm ms-2"><i class="bi bi-twitter-x"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5>Iagon</h5>
+                                    <p>Decentralized cloud storage & AI compute. Live mainnet, enterprise partners, real storage payments.</p>
+                                    <a href="https://iagon.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a>
+                                    <a href="https://twitter.com/IagonOfficial" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm ms-2"><i class="bi bi-twitter-x"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Housing & Real Estate -->
+            <div class="accordion-item">
+                <h2 class="accordion-header industry-header">
+                    <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#housing">Housing & Real Estate</button>
+                </h2>
+                <div id="housing" class="accordion-collapse collapse">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4">
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5>Empowa</h5>
+                                    <p>Affordable homes in Mozambique. NFT title deeds, real families living in completed houses.</p>
+                                    <a href="https://empowa.io" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a>
+                                    <a href="https://twitter.com/Empowa_io" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm ms-2"><i class="bi bi-twitter-x"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finance & DeFi -->
+            <div class="accordion-item">
+                <h2 class="accordion-header industry-header">
+                    <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#finance">Finance & DeFi (Real Yield/TVL)</button>
+                </h2>
+                <div id="finance" class="accordion-collapse collapse">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4">
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>MELD</h5><p>Crypto-fiat neobank – live loans & ramps in 2025.</p><a href="https://meld.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>Indigo Protocol</h5><p>Synthetic assets (iBTC, iStocks).</p><a href="https://indigoprotocol.io" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>Lenfi</h5><p>Real-yield lending.</p><a href="https://lenfi.io" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>Liqwid Finance</h5><p>Liquid staking + lending.</p><a href="https://liqwid.finance" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>FluidTokens</h5><p>P2P NFT-backed lending – live.</p><a href="https://fluidtokens.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>Minswap</h5><p>Top DEX – highest volume/TVL.</p><a href="https://minswap.org" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>Axo</h5><p>Perpetuals & spot trading.</p><a href="https://axo.trade" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>Genius Yield</h5><p>Advanced order types & yield optimizer – live.</p><a href="https://geniusyield.co" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payments & Stablecoins -->
+            <div class="accordion-item">
+                <h2 class="accordion-header industry-header">
+                    <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#payments">Payments & Stablecoins</button>
+                </h2>
+                <div id="payments" class="accordion-collapse collapse">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4">
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>Djed</h5><p>Over-collateralized stablecoin.</p><a href="https://djed.xyz" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>Revuto</h5><p>Pay real subscriptions with crypto – real revenue.</p><a href="https://revuto.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oracles -->
+            <div class="accordion-item">
+                <h2 class="accordion-header industry-header">
+                    <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#oracles">Oracles & Data</button>
+                </h2>
+                <div id="oracles" class="accordion-collapse collapse">
+                    <div class="row row-cols-1 row-cols-md-2 g-4 p-4">
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>Orcfax</h5><p>Auditable oracle network – live.</p><a href="https://orcfax.io" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Identity -->
+            <div class="accordion-item">
+                <h2 class="accordion-header industry-header">
+                    <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#identity">Digital Identity</button>
+                </h2>
+                <div id="identity" class="accordion-collapse collapse">
+                    <div class="row row-cols-1 row-cols-md-2 g-4 p-4">
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>Atala PRISM</h5><p>5M+ credentials in Ethiopia.</p><a href="https://atalaprism.io" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>AdaHandle</h5><p>$handle standard – used by every major wallet.</p><a href="https://adahandle.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tokenization & Ownership -->
+            <div class="accordion-item">
+                <h2 class="accordion-header industry-header">
+                    <button class="accordion-button collapsed fw-bold fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#tokenization">Digital Ownership & Tokenization</button>
+                </h2>
+                <div id="tokenization" class="accordion-collapse collapse">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4">
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>Book.io</h5><p>Tokenized books with real publishers.</p><a href="https://book.io" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                        <div class="col"><div class="card h-100"><div class="card-body"><h5>NMKR</h5><p>Enterprise NFT platform (New Balance, FIFA, luxury brands).</p><a href="https://nmkr.io" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a></div></div></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Submission Modal -->
+    <div class="modal fade" id="submitModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title text-white">Submit Project for Blue Pages</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form action="https://formsubmit.co/bluepagesada@gmail.com" method="POST">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_subject" value="Blue Pages Submission">
+              <input type="hidden" name="_next" value="https://bluepagesada.github.io/bluepagesada/">
+              <div class="mb-3"><label class="form-label">Project Name *</label><input type="text" class="form-control" name="Project Name" required></div>
+              <div class="mb-3"><label class="form-label">Website *</label><input type="url" class="form-control" name="Website" required></div>
+              <div class="mb-3"><label class="form-label">X Handle</label><input type="text" class="form-control" name="X Handle"></div>
+              <div class="mb-3"><label class="form-label">Industry *</label><input type="text" class="form-control" name="Industry" required></div>
+              <div class="mb-3"><label class="form-label">Description *</label><textarea class="form-control" name="Description" rows="3" required></textarea></div>
+              <div class="mb-3"><label class="form-label">Proof of Real-World Impact * (links)</label><textarea class="form-control" name="Proof" rows="5" required></textarea></div>
+              <div class="mb-3"><label class="form-label">Your Email *</label><input type="email" class="form-control" name="email" required></div>
+              <button type="submit" class="btn btn-primary w-100">Submit for Review</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-3 fw-bold">Donate to Support Blue Pages</p>
+            <p class="mb-4">addr1qx9c4qr8lpp73lxz2z80jgdme9ua22096d8kdhf0249jv5qgpe74yz745c80rht0pm0zrahhudcccgawzvxvg4lc59ks7fw8yq</p>
+            <p><strong>@BluePagesADA</strong> • Launched 2025<br>
+            <small>Built for the Cardano community.</small></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
