@@ -11,10 +11,11 @@ body { background:var(--bg); color:var(--text); transition: all 0.3s; font-famil
 footer { background:var(--blue); color:white; padding:5rem 0 4rem; }
 #copyFeedback { opacity:0; transition: opacity 0.3s; font-weight:bold; }
 .logo-circle { width:48px; height:48px; border-radius:50%; background:var(--blue); color:white; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:800; flex-shrink:0; }
-.metrics { margin-top:auto; padding-top:1rem; border-top:1px solid var(--border); font-size:0.875rem; }
+.metrics { margin-top:auto; padding-top:1rem; border-top:1px solid var(--border); font-size:0.875rem; line-height:1.4; }
 .verified-badge { background:#28a745; color:white; font-size:0.7rem; padding:2px 8px; border-radius:4px; }
 .nav-pills .nav-link.active { background:var(--blue); }
 .tab-content .row { min-height:400px; }
 .skeleton { background:#e0e0e0; border-radius:8px; animation:pulse 1.5s infinite; }
 @keyframes pulse { 0% { opacity:0.6; } 50% { opacity:1; } 100% { opacity:0.6; } }
 @media (max-width:768px) { .hero { padding:6rem 0 4rem; } .logo-svg svg { max-width:300px; } }
+.search-box { max-width:700px; margin:2rem auto; }
