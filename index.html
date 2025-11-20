@@ -31,10 +31,10 @@
                 </svg>
             </div>
             <h1 class="display-5 fw-bold text-white mb-4">Blue Pages</h1>
-            <p class="lead mb-4 fw-medium">The only Cardano directory that removes projects when they stop shipping.<br>68 left. Verified November 20, 2025.</p>
-            <p class="fs-5 mb-4">As of <span id="update-date">November 20, 2025</span> – <strong id="project-count">68 projects</strong> – curated daily • <a href="#" data-bs-toggle="modal" data-bs-target="#verificationModal" class="text-white text-decoration-underline">How we verify →</a></p>
+            <p class="lead mb-4 fw-medium">The only Cardano directory that removes projects when they stop shipping.<br>62 left. Verified November 20, 2025.</p>
+            <p class="fs-5 mb-4">As of <span id="update-date">November 20, 2025</span> – <strong id="project-count">62 projects</strong> – curated daily • <a href="#" data-bs-toggle="modal" data-bs-target="#verificationModal" class="text-white text-decoration-underline">How we verify →</a></p>
             <div>
-                <a href="#hallOfFame" class="btn btn-light btn-lg me-3">Hall of Fame →</a>
+                <a href="#projects" class="btn btn-light btn-lg me-3">Explore Projects →</a>
                 <button class="btn btn-outline-light btn-lg me-3" data-bs-toggle="modal" data-bs-target="#submitModal">Submit Project</button>
                 <button id="themeToggle" class="btn btn-outline-light btn-lg"><i class="bi bi-moon-stars-fill"></i></button>
             </div>
@@ -43,13 +43,13 @@
 
     <!-- Hall of Fame -->
     <div class="container my-5">
-        <h2 class="text-center mb-5 fw-bold text-primary">Hall of Fame – Highest Real-World Impact (2025)</h2>
+        <h2 class="text-center mb-5 fw-bold text-primary">Hall of Fame – Highest Real-World Impact (Nov 2025)</h2>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" id="hallOfFame">
-            <!-- Loaded by JS with skeleton fallback -->
+            <!-- loaded by JS + skeleton -->
             <div class="col"><div class="card h-100"><div class="card-body"><div class="skeleton" style="height:200px;"></div></div></div></div>
             <div class="col"><div class="card h-100"><div class="card-body"><div class="skeleton" style="height:200px;"></div></div></div></div>
             <!-- 12 skeletons -->
-          </div>
+        </div>
     </div>
 
     <!-- Search -->
@@ -57,34 +57,13 @@
         <input type="text" id="searchInput" class="form-control form-control-lg shadow" placeholder="Search projects..." autocomplete="off">
     </div>
 
-    <!-- Category Tabs -->
-    <div class="container my-5">
+    <!-- Tabs -->
+    <div class="container my-5" id="projects">
         <ul class="nav nav-pills justify-content-center mb-5" id="categoryTabs" role="tablist"></ul>
         <div class="tab-content" id="categoryTabContent"></div>
     </div>
 
-    <!-- Verification Modal -->
-    <div class="modal fade" id="verificationModal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Verification Standard – No Compromise</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <p>Every project must have <strong>proven</strong>:</p>
-            <ul>
-              <li>Revenue from fees (DefiLlama > $100k/year or official report)</li>
-              <li>Real users/TVL > $5M sustained</li>
-              <li>Public government/enterprise contract or live deployment</li>
-            </ul>
-            <p>Checked quarterly. If it slips – it's removed. No exceptions.<br>Last full audit: November 20, 2025</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Submit Modal & Footer same as your last working version -->
+    <!-- Modals and footer same as your current one, just copy from current index.html -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="script.js"></script>
