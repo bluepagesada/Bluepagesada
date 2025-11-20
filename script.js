@@ -10,29 +10,28 @@ const tagClasses = {
 
 const categories = {
     depin: "DePIN & Connectivity",
-    rwa: "Real-World Assets & Tokenization",
-    defi: "Finance & Real-Yield DeFi",
+    rwa: "Real-World Assets",
+    defi: "DeFi & Finance",
     payments: "Payments & Stablecoins",
-    oracles: "Oracles & Data",
+    oracles: "Oracles",
     identity: "Digital Identity",
     wallets: "Wallets",
-    infra: "Infrastructure & Dev Tools",
-    nft: "NFT & Tokenization Platforms",
-    government: "Government & Institutions",
-    other: "Other Real-World Use Cases"
+    infra: "Infrastructure",
+    nft: "NFT Platforms",
+    other: "Other"
 };
 
 let projects = [];
 
 fetch('projects.json')
     .then(r => {
-        if (!r.ok) throw new Error('Failed to load projects.json');
+        if (!r.ok) throw new Error('Failed');
         return r.json();
     })
     .then(data => {
         projects = data;
         const count = projects.length;
-        const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        const dateStr = "November 20, 2025";
 
         document.getElementById('update-date').textContent = dateStr;
         document.getElementById('project-count').textContent = `${count} projects that actually matter`;
@@ -41,28 +40,29 @@ fetch('projects.json')
         renderHallOfFame();
         renderTabs();
         setupSearch();
+        document.querySelectorAll('.skeleton').forEach(el => el.remove());
     })
-    .catch(err => {
-        console.error(err);
-        document.getElementById('projects').innerHTML = '<div class="alert alert-danger text-center">Failed to load projects.json – check console. Likely invalid JSON.</div>';
+    .catch(() => {
+        document.getElementById('projects').innerHTML = '<div class="alert alert-danger">JSON load failed – tell the maintainer to stop being useless</div>';
     });
 
 function renderHallOfFame() {
-    const featured = projects.filter(p => ["World Mobile","Minswap","Indigo Protocol","Liqwid Finance","NMKR","JPG.store","Atala PRISM","Lenfi","Book.io","Empowa","Orcfax","Tangible","Blockfrost","Lace Wallet","Eternl"].includes(p.name));
+    const featuredNames = ["World Mobile","Minswap","Indigo Protocol","Liqwid Finance","Lenfi","NMKR","JPG.store","Atala PRISM","Book.io","Empowa","Orcfax","Tangible","Blockfrost"];
+    const featured = projects.filter(p => featuredNames.includes(p.name));
     const container = document.getElementById('hallOfFame');
     container.innerHTML = featured.map(p => `
         <div class="col">
             <div class="card h-100 project-card border-primary shadow-lg">
                 <div class="card-body d-flex flex-column">
                     <div class="d-flex align-items-center mb-3">
-                        ${p.logo ? `<img src="${p.logo}" alt="${p.name}" class="me-3 rounded" style="width:48px;height:48px;object-fit:contain;">` : `<div class="logo-circle me-3">${p.name[0]}</div>`}
+                        ${p.logo ? `<img src="${p.logo}" alt="${p.name}" class="me-3 logo-img rounded">` : `<div class="logo-circle me-3">${p.name[0]}</div>`}
                         <h5 class="mb-0">${p.name}</h5>
                     </div>
-                    <p class="small text-muted">${p.desc}</p>
+                    <p class="small text-muted mt-2">${p.desc}</p>
                     <div class="badges mb-3">${p.tags.map(t => `<span class="badge ${tagClasses[t] || 'badge-secondary'} me-1">${t}</span>`).join('')}</div>
                     <div class="metrics">
                         <small>${p.metrics}</small><br>
-                        <small>Proof: <a href="${p.proof}" target="_blank" class="text-primary">source ↗</a></small>
+                        <small>Proof: <a href="${p.proof}" target="_blank">source ↗</a></small>
                     </div>
                     <a href="${p.link}" target="_blank" class="btn btn-primary btn-sm mt-auto">Visit →</a>
                 </div>
@@ -81,39 +81,35 @@ function renderTabs() {
         const filtered = projects.filter(p => p.cat === key);
         if (filtered.length === 0) return;
 
-        // Create tab
-        const tab = document.createElement('li');
-        tab.className = 'nav-item';
-        tab.innerHTML = `<a class="nav-link ${index === 0 ? 'active' : ''}" data-bs-toggle="pill" href="#tab-${key}">${title} (${filtered.length})</a>`;
-        tabList.appendChild(tab);
+        const tab = document.createElement('li'>
+            <button class="nav-link ${index === 0 ? 'active' : ''}" data-bs-toggle="pill" data-bs-target="#tab-${key}" type="button">${title} (${filtered.length})</button>
+        </li>`;
+        tabList.innerHTML += tab;
 
-        // Create tab pane
         const pane = document.createElement('div');
-        pane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
-        pane.id = `tab-${key}`;
-        pane.innerHTML = `<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4">
-            ${filtered.map(p => `
-                <div class="col">
-                    <div class="card h-100 project-card">
-                        <div class="card-body d-flex flex-column">
-                            <div class="d-flex align-items-center mb-3">
-                                ${p.logo ? `<img src="${p.logo}" alt="${p.name}" class="me-3 rounded" style="width:48px;height:48px;object-fit:contain;">` : `<div class="logo-circle me-3">${p.name[0]}</div>`}
-                                <h5 class="mb-0">${p.name}</h5>
-                            </div>
-                            <p class="small text-muted">${p.desc}</p>
-                            <div class="badges mb-3">${p.tags.map(t => `<span class="badge ${tagClasses[t] || 'badge-secondary'} me-1">${t}</span>`).join('')}</div>
-                            <div class="metrics">
-                                <small>${p.metrics}</small><br>
-                                <small>Proof: <a href="${p.proof}" target="_blank" class="text-primary">source ↗</a></small>
-                            </div>
-                            <div class="mt-auto pt-3">
-                                <a href="${p.link}" target="_blank" class="btn btn-primary btn-sm me-2">Visit</a>
-                                ${p.twitter ? `<a href="https://twitter.com/${p.twitter}" target="_blank" class="btn btn-outline-dark btn-sm"><i class="bi bi-twitter-x"></i></a>` : ''}
+        pane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}" id="tab-${key}">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                ${filtered.map(p => `
+                    <div class="col">
+                        <div class="card h-100 project-card">
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex align-items-center mb-3">
+                                    ${p.logo ? `<img src="${p.logo}" alt="${p.name}" class="me-3 logo-img rounded">` : `<div class="logo-circle me-3">${p.name[0]}</div>`}
+                                    <h5 class="mb-0">${p.name}</h5>
+                                </div>
+                                <p class="small text-muted">${p.desc}</p>
+                                <div class="badges mb-3">${p.tags.map(t => `<span class="badge ${tagClasses[t] || 'badge-secondary'} me-1">${t}</span>`).join('')}</div>
+                                <div class="metrics">
+                                    <small>${p.metrics}</small><br>
+                                    <small>Proof: <a href="${p.proof}" target="_blank">source ↗</a></small>
+                                </div>
+                                <a href="${p.link}" target="_blank" class="btn btn-primary btn-sm mt-auto">Visit →</a>
+                                <small class="text-muted mt-2 d-block">Verified: Nov 20, 2025</small>
                             </div>
                         </div>
                     </div>
-                </div>
-            `).join('')}
+                `).join('')}
+            </div>
         </div>`;
         tabContent.appendChild(pane);
     });
@@ -130,7 +126,7 @@ function setupSearch() {
     });
 }
 
-// Theme toggle, copy, visitor counter (same as before – copy from my last full version)
+// Theme toggle, copy, visitor counter same as last version
 
 const themeToggle = document.getElementById('themeToggle');
 if (localStorage.getItem('theme') === 'dark') {
@@ -145,7 +141,7 @@ themeToggle.addEventListener('click', () => {
     } else {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
-        themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+        themeToggle.innerHTML = '<i class="bi-sun-fill"></i>';
     }
 });
 
