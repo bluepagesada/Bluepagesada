@@ -1,0 +1,15 @@
+:root { --blue: #0033AD; --cyan: #00D4FF; --text: #212529; --bg: #f8f9fa; --card-bg: #ffffff; }
+[data-theme="dark"] { --text: #e9ecef; --bg: #121212; --card-bg: #1e1e1e; }
+body { background:var(--bg); color:var(--text); transition: all 0.3s; font-family: system-ui,-apple-system,sans-serif; }
+.hero { background: linear-gradient(135deg, var(--blue), var(--cyan)); color: white; padding: 6rem 0; }
+.card { background:var(--card-bg); border:none; border-radius:12px; transition:all .3s; height:100%; }
+.card:hover { transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,0,0,.15); }
+.badge-revenue { background:#ffc107; color:#000; }
+.badge-gov { background:#28a745; color:#fff; }
+.badge-enterprise { background:#6f42c1; color:#fff; }
+.badge-defi { background:#0068A5; color:#fff; }
+footer { background:var(--blue); color:white; padding:4rem 0; }
+#visitor-count { font-weight:800; color:var(--cyan); }
+.search-box { max-width:700px; margin:2rem auto; }
+#copyFeedback { opacity:0; transition: opacity 0.3s; }
+.logo-svg { filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
