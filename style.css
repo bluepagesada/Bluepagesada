@@ -21,34 +21,41 @@ body {
   font-family: system-ui,-apple-system,sans-serif;
 }
 
+/* HERO – NOW PERFECT ON EVERY DEVICE */
 .hero {
   background: linear-gradient(135deg, #001f3f 0%, #00a8e8 100%);
-  color: white;
-  padding: 6rem 0 5rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
 }
 
 .hero .container {
-  max-width: 1200px;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
 }
 
 .hero-logo {
-  width: 140px;
-  height: 140px;
-  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.6));
+  width: 180px;
+  height: 180px;
+  filter: drop-shadow(0 15px 35px rgba(0,0,0,0.6));
 }
 
 @media (min-width: 992px) {
   .hero-logo {
-    width: 180px;
-    height: 180px;
+    width: 240px;
+    height: 240px;
   }
 }
 
 .hero h1 {
-  font-size: 6rem;
+  font-size: 7rem;
   font-weight: 900;
-  letter-spacing: -3px;
-  line-height: 1;
+  letter-spacing: -4px;
+  line-height: 0.9;
+  margin-top: -20px;
 }
 
 .hero h1 .fw-light {
@@ -56,13 +63,13 @@ body {
 }
 
 .hero .lead {
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: 500;
   line-height: 1.4;
 }
 
 .hero .fs-4 {
-  font-size: 1.4rem !important;
+  font-size: 1.5rem !important;
   font-weight: 400;
 }
 
@@ -78,6 +85,7 @@ body {
   color: #001f3f;
 }
 
+/* CARDS & GENERAL */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -97,7 +105,7 @@ body {
   height: 64px;
   object-fit: contain;
   border-radius: 12px;
-  background: #f0f0;
+  background: #f0f0f0;
 }
 
 .logo-placeholder {
@@ -139,17 +147,26 @@ body {
   font-size: 0.8rem;
 }
 
-[data-theme="dark"] .badge-revenue { color: #212529; }
+/* Dark mode fixes */
+[data-theme="dark"] .badge-revenue {
+  color: #212529;
+}
 
+[data-theme="dark"] .card img.logo,
+[data-theme="dark"] .logo-placeholder {
+  background: #333;
+}
+
+/* Mobile tweaks */
 @media (max-width: 576px) {
   .hero h1 {
-    font-size: 4.5rem;
+    font-size: 5rem;
   }
   .hero .lead {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
   .hero-logo {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
   }
 }
