@@ -31,6 +31,25 @@ fetch('projects.json')
 
         renderProjects();
         setupTabs();
+        const catCounts = {};
+        projects.forEach(p => catCounts[p.cat] = (catCounts[p.cat] || 0) + 1);
+        document.querySelectorAll('#categoryTabs a[data-cat]').forEach(link => {
+            const cat = link.getAttribute('data-cat');
+            const title = cat === 'all' ? 'All' : categories[cat] || cat;
+            const count = cat === 'all' ? count : (catCounts[cat] || 0);
+            link.textContent = `${title} (${count})`;
+        });
+        function setupTabs() {
+    document.querySelectorAll('#categoryTabs a').forEach(tab => {
+        tab.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelector('#categoryTabs .nav-link.active')?.classList.remove('active');
+            tab.classList.add('active');
+            currentFilter = tab.getAttribute('data-cat');
+            renderProjects();
+        });
+    });
+}
         setupSearch();
         setupSort();
         document.getElementById('loadingSkeleton').style.display = 'none';
