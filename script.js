@@ -22,7 +22,6 @@ const categories = {
     wallets: "Wallets",
     infra: "Infrastructure & Dev Tools",
     nft: "NFT & Tokenization Platforms",
-    gaming: "Gaming & Metaverse",
     other: "Other Real-World Use Cases"
 };
 
@@ -37,12 +36,14 @@ fetch('projects.json')
         const count = projects.length;
         const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
+        // Update hero
         const projectCountEl = document.getElementById('project-count');
         if (projectCountEl) projectCountEl.textContent = `${count} projects`;
 
         const updateDateEl = document.getElementById('update-date');
         if (updateDateEl) updateDateEl.textContent = dateStr;
 
+        // Update search placeholder
         const searchInput = document.getElementById('searchInput');
         if (searchInput) searchInput.placeholder = `Search all ${count} projects...`;
 
@@ -63,6 +64,7 @@ fetch('projects.json')
         setupSearch();
         setupSort();
 
+        // Hide skeleton, show grid
         const skeleton = document.getElementById('loadingSkeleton');
         if (skeleton) skeleton.style.display = 'none';
         const grid = document.getElementById('projectsGrid');
@@ -83,6 +85,7 @@ function renderProjects() {
 
     let filtered = currentFilter === 'all' ? projects : projects.filter(p => p.cat === currentFilter);
 
+    // Sort
     filtered.sort((a, b) => {
         if (currentSort === "impact") return (b.impactScore || 0) - (a.impactScore || 0);
         if (currentSort === "name") return a.name.localeCompare(b.name);
@@ -98,34 +101,23 @@ function renderProjects() {
         const col = document.createElement('div');
         col.className = 'col';
         col.innerHTML = `
-            <div class="card h-100 project-card shadow-sm border-0">
-                <div class="card-body d-flex flex-column p-4">
-                    <div class="d-flex align-items-start mb-3">
-                        ${p.logo ? `<img src="${p.logo}" alt="${p.name} logo" class="logo me-3 flex-shrink-0">` : `<div class="logo-placeholder me-3 flex-shrink-0"></div>`}
-                        <div class="flex-grow-1">
-                            <h5 class="fw-bold mb-1">${p.name}</h5>
-                            <small class="text-muted text-uppercase fw-semibold">${categories[p.cat] || p.cat}</small>
-                        </div>
+            <div class="card h-100 project-card">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex align-items-center mb-3">
+                        ${p.logo ? `<img src="${p.logo}" alt="${p.name} logo" class="logo me-3">` : `<div class="logo-placeholder bg-primary text-white d-flex align-items-center justify-content-center me-3 rounded" style="width:48px;height:48px;font-size:1.5rem;font-weight:bold;">${p.name[0]}</div>`}
+                        <h5 class="mb-0">${p.name}</h5>
                     </div>
-
-                    <p class="text-muted small flex-grow-1 mb-3">${p.desc}</p>
-
-                    <div class="metrics fw-bold text-primary mb-3">${p.metrics || 'Live on Cardano mainnet'}</div>
-
-                    <div class="mb-3">
+                    <p class="text-muted small flex-grow-1">${p.desc}</p>
+                    <div class="metrics mb-2">${p.metrics || ''}</div>
+                    <div class="mb-2">
                         ${p.tags.map(t => `<span class="badge ${tagClasses[t] || 'badge-defi'} me-1">${t}</span>`).join('')}
                     </div>
-
-                    <div class="proof-link small mb-3">
-                        Proof: <a href="${p.proof}" target="_blank" rel="noopener" class="text-decoration-underline">${p.proofText || 'Source ↗'}</a>
+                    <div class="proof-link mb-2"><small>Proof: <a href="${p.proof}" target="_blank" rel="noopener">${p.proofText || 'Source ↗'}</a></small></div>
+                    <div class="mt-auto">
+                        <a href="${p.link}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Website</a>
+                        ${p.twitter ? `<a href="https://twitter.com/${p.twitter}" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm ms-2"><i class="bi bi-twitter-x"></i></a>` : ''}
                     </div>
-
-                    <div class="mt-auto d-flex gap-2">
-                        <a href="${p.link}" target="_blank" rel="noopener" class="btn btn-primary btn-sm flex-grow-1">Website</a>
-                        ${p.twitter ? `<a href="https://twitter.com/${p.twitter}" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm"><i class="bi bi-twitter-x"></i></a>` : ''}
-                    </div>
-
-                    <small class="text-muted mt-3 d-block text-end">Verified: Nov 20, 2025</small>
+                    <small class="text-muted mt-2 d-block">Verified: Nov 20, 2025</small>
                 </div>
             </div>
         `;
@@ -180,7 +172,7 @@ if (themeToggle) {
             localStorage.setItem('theme', 'light');
             themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
         } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
+            document.document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
             themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
         }
