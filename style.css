@@ -1,5 +1,5 @@
 :root {
-  --blue: #002D72;
+  --blue: #001f3f;
   --cyan: #00D4FF;
   --text: #212529;
   --bg: #f8f9fa;
@@ -22,15 +22,60 @@ body {
 }
 
 .hero {
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
-  color: white;
-  padding: 8rem 0 6rem;
+  background: linear-gradient(135deg, #001f3f 0%, #00a8e8 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
-@media (max-width: 768px) {
-  .hero {
-    padding: 5rem 0 4rem;
+.hero .container {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.hero-logo {
+  width: 120px;
+  height: 120px;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.6));
+}
+
+@media (min-width: 768px) {
+  .hero-logo {
+    width: 180px;
+    height: 180px;
   }
+}
+
+.hero h1 {
+  font-size: 5.5rem;
+  font-weight: 900;
+  letter-spacing: -2px;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.hero h1 .fw-light {
+  font-weight: 300;
+}
+
+.hero .lead {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.hero .fs-4 {
+  font-size: 1.35rem !important;
+  font-weight: 400;
+}
+
+.hero .btn {
+  border-radius: 50px;
+  padding: 0.9rem 2rem;
+  font-weight: 600;
+}
+
+.hero .btn-light {
+  background: white;
+  color: #001f3f;
 }
 
 .card {
@@ -89,30 +134,22 @@ body {
   min-height: 600px;
 }
 
-.logo-svg {
-  filter: drop-shadow(0 6px 20px rgba(0,0,0,0.5));
-}
-
-.logo-svg svg {
-  max-width: 420px;
-  width: 100%;
-  height: auto;
-}
-
 .badge {
   font-weight: 600;
   font-size: 0.8rem;
 }
 
-/* Dark mode badge contrast fix */
+/* Dark mode fixes */
 [data-theme="dark"] .badge-revenue { color: #212529; }
+[data-theme="dark"] .card img.logo, [data-theme="dark"] .logo-placeholder {
+  background: #333;
+}
 
 @media (max-width: 576px) {
-  .logo-svg svg {
-    max-width: 320px;
+  .hero h1 {
+    font-size: 4rem;
   }
-  .card img.logo, .logo-placeholder {
-    width: 56px;
-    height: 56px;
+  .hero .lead {
+    font-size: 1.3rem;
   }
 }
