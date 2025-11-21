@@ -1,0 +1,14 @@
+:root { --blue: #002D72; --cyan: #00D4FF; --text: #212529; --bg: #f8f9fa; --card-bg: #ffffff; --border: #e0e0e0; }
+[data-theme="dark"] { --text: #e9ecef; --bg: #121212; --card-bg: #1e1e1e; --border: #333; }
+body { background:var(--bg); color:var(--text); transition: all 0.3s; font-family: system-ui,-apple-system,sans-serif; }
+.hero { background: linear-gradient(135deg, var(--blue), var(--cyan)); color: white; padding: 8rem 0 6rem; }
+.card { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; transition:all .3s; height:100%; overflow:hidden; }
+.card:hover { transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,0,0,.15); }
+.card img.logo { width:48px; height:48px; object-fit:contain; border-radius:8px; }
+.metrics { font-size:0.875rem; color:#555; margin:0.5rem 0; }
+.proof-link { font-size:0.8rem; }
+.nav-pills .nav-link.active { background:var(--blue); }
+#loadingSkeleton { min-height: 600px; }
+.logo-svg { filter: drop-shadow(0 6px 20px rgba(0,0,0,0.5)); }
+.badge { font-weight:600; }
+@media (max-width: 768px) { .hero { padding: 6rem 0 4rem; } .logo-svg svg { width:320px; height:auto; } }
