@@ -1,5 +1,59 @@
 "use strict";
 
+// RANDOM QUIRKY SPLASH TEXTS (Minecraft style)
+const splashes = [
+  "No memecoins were harmed in the making of this directory.",
+  "Proof or it didn't happen.",
+  "Vaporware's natural enemy.",
+  "71 projects and holding the line.",
+  "Real revenue only. Sorry, not sorry.",
+  "Where hype goes to die.",
+  "Cardano: Actually shipping since 2017.",
+  "Strictly business. No clown coins.",
+  "The red pill of Cardano directories.",
+  "Curated by someone who hates bullshit.",
+  "We removed your favorite project.",
+  "Quality > Quantity. Always.",
+  "The directory that says 'no' 99% of the time.",
+  "Real users or GTFO.",
+  "Government contracts or bust.",
+  "No airdrops. No promises. Just shipping.",
+  "Blue pilled? Stay away.",
+  "The only list that matters.",
+  "Still waiting for that 'killer app'? It's here.",
+  "Enterprise adoption loading... 100%.",
+  "We ghosted 500+ submissions this week.",
+  "Not financial advice. Just facts.",
+  "Cardano summer never came. Winter is fine.",
+  "Running on Voltaire and spite.",
+  "The purge continues.",
+  "Your rugpull isn't welcome here.",
+  "Real yield or real yieldn't.",
+  "We don't list dreams. Only reality.",
+  "The Cardano filter you didn't know you needed.",
+  "Now playing: Shipping Sounds>",
+  "Powered by Haskell and disappointment.",
+  "0xHype = false",
+  "Stake pools hate this list.",
+  "One list to rule them all.",
+  "The 'actually works' filter.",
+  "No roadmap. Just results.",
+  "Blue Pages: Now with 100% less hopium.",
+  "We fact-checked your whitepaper.",
+  "Cardano's immune system.",
+  "The directory that removes more than it adds.",
+  "Real utility or real quiet."
+];
+
+// Random splash on load
+document.addEventListener('DOMContentLoaded', () => {
+  const splashEl = document.getElementById('splash-text');
+  if (splashEl) {
+    const randomSplash = splashes[Math.floor(Math.random() * splashes.length)];
+    splashEl.textContent = randomSplash;
+  }
+});
+
 const address = "addr1qx9c4qr8lpp73lxz2z80jgdme9ua22096d8kdhf0249jv5qgpe74yz745c80rht0pm0zrahhudcccgawzvxvg4lc59ks7fw8yq";
 
 let projects = [];
