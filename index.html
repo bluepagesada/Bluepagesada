@@ -18,41 +18,55 @@
 </head>
 <body>
 
-    <!-- Hero - TIGHT, PERFECT HERO MATCHING YOUR SCREENSHOT -->
-    <section class="hero text-center text-white">
+    <!-- HERO – FINAL, PERFECT VERSION -->
+    <section class="hero text-center text-white d-flex align-items-center">
         <div class="container">
-            <div class="row justify-content-center align-items-center" style="min-height:80vh;">
+            <div class="row justify-content-center">
                 <div class="col-lg-10 col-xxl-8">
-                    <div class="d-flex align-items-center justify-content-center mb-4">
-                        <!-- Exact logo from your screenshot - inline SVG, never breaks -->
-                        <svg width="160" height="160" viewBox="0 0 160 160" class="hero-logo me-4" xmlns="http://www.w3.org/2000/svg">
-                            <g transform="translate(80,80)">
-                                <rect x="-70" y="-70" width="140" height="140" rx="20" fill="#002D72" transform="rotate(45)"/>
-                                <polygon points="0,-40 35,25 -35,25" fill="white"/>
+
+                    <!-- Exact original Blue Pages diamond logo as inline SVG -->
+                    <div class="text-center mb-5">
+                        <svg width="220" height="220" viewBox="0 0 220 220" class="hero-logo" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="bluegrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#0033AD"/>
+                                    <stop offset="100%" stop-color="#00D4FF"/>
+                                </linearGradient>
+                            </defs>
+                            <g filter="url(#shadow)">
+                                <path d="M110 20 L200 80 L200 140 L110 200 L20 140 L20 80 Z" fill="url(#bluegrad)" stroke="#002D5A" stroke-width="6"/>
+                                <path d="M110 60 L170 100 L170 120 L110 160 L50 120 L50 100 Z" fill="white"/>
+                                <path d="M110 80 L145 110 L110 140 L75 110 Z" fill="#002D5A"/>
                             </g>
-                            <filter id="shadow">
-                                <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
-                                <feOffset dx="0" dy="10" result="offsetblur"/>
-                                <feFlood flood-color="rgba(0,0,0,0.5)"/>
-                                <feComposite in2="offsetblur" operator="in"/>
-                                <feMerge>
-                                    <feMergeNode/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                            </filter>
+                            <defs>
+                                <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+                                    <feOffset dx="0" dy="15" result="offsetblur"/>
+                                    <feFlood flood-color="rgba(0,0,0,0.5)"/>
+                                    <feComposite in2="offsetblur" operator="in"/>
+                                    <feMerge>
+                                        <feMergeNode/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
                         </svg>
                     </div>
+
                     <h1 class="display-1 fw-bold mb-3">
                         Blue<span class="fw-light">Pages</span>
                     </h1>
+
                     <p class="lead fw-medium mb-4 opacity-95">
                         The strict real-world Cardano directory.<br class="d-none d-md-block">
                         Only projects with revenue, real users, or enterprise contracts. Proof required.
                     </p>
+
                     <p class="fs-4 mb-5 opacity-90">
                         As of <span id="update-date">November 20, 2025</span> – <strong id="project-count">71 projects</strong> – verified daily
                     </p>
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+
+                    <div class="d-flex justify-content-center gap-4 flex-wrap">
                         <a href="#projects" class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-semibold">Explore Projects →</a>
                         <button class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#submitModal">Submit Project</button>
                         <button id="themeToggle" class="btn btn-outline-light btn-lg rounded-pill"><i class="bi bi-moon-stars-fill"></i></button>
@@ -62,7 +76,6 @@
         </div>
     </section>
 
-    <!-- Rest of site unchanged from nuclear version -->
     <!-- Verification Alert -->
     <div class="container my-5">
         <div class="alert alert-info text-center fw-bold fs-5">
@@ -103,10 +116,18 @@
         </ul>
     </div>
 
-    <!-- Projects Grid -->
+    <!-- Projects Grid + Skeleton -->
     <div class="container my-5" id="projects">
         <div id="loadingSkeleton" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <div class="col" v-for="i in 9"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-5"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-5"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
         </div>
         <div id="projectsGrid" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" style="display:none;"></div>
     </div>
