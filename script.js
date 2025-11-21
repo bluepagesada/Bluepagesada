@@ -169,4 +169,47 @@ function renderTabs() {
         const filtered = projects.filter(p => p.cat === key);
         if (filtered.length === 0) return;
 
-        const tabItem = doc
+        const tabItem = document.createElement('li');
+        tabItem.className = 'nav-item';
+        tabItem.innerHTML = `<button class="nav-link ${index === 0 ? 'active' : ''}" data-bs-toggle="pill" data-bs-target="#tab-${key}" type="button">${title} (${filtered.length})</button>`;
+        tabList.appendChild(tabItem);
+
+        const tabPane = document.createElement('div');
+        tabPane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
+        tabPane.id = `tab-${key}`;
+        tabPane.innerHTML = `<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 p-4">
+            ${filtered.map(p => `
+                <div class="col">
+                    <div class="card h-100 project-card">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex align-items-center mb-3">
+                                ${p.logo ? `<img src="${p.logo}" alt="${p.name}" class="me-3 logo-img rounded">` : `<div class="logo-circle me-3">${p.name[0]}</div>`}
+                                <h5 class="mb-0">${p.name}</h5>
+                            </div>
+                            <p class="small text-muted">${p.desc}</p>
+                            <div class="badges mb-2">${p.tags.map(t => `<span class="badge ${tagClasses[t] || 'badge-secondary'} me-1">${t}</span>`).join('')}</div>
+                            <div class="metrics">
+                                <small>${p.metrics}</small><br>
+                                <small>Proof: <a href="${p.proof}" target="_blank">source ↗</a></small>
+                            </div>
+                            <a href="${p.link}" target="_blank" class="btn btn-primary btn-sm mt-auto">Visit →</a>
+                            <small class="text-muted mt-2 d-block">Verified: Nov 20, 2025</small>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>`;
+        tabContent.appendChild(tabPane);
+    });
+}
+
+function setupSearch() {
+    document.getElementById('searchInput').addEventListener('input', e => {
+        const term = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('.project-card').forEach(card => {
+            const col = card.closest('.col');
+            const matches = card.textContent.toLowerCase().includes(term);
+            col.style.display = (term === '' || matches) ? '' : 'none';
+        });
+    });
+}
