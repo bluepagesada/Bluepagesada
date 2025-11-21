@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blue Pages – The strict real-world Cardano project directory. Only projects with revenue, real users, or enterprise adoption. No hype. No memecoins.">
+    <meta name="description" content="Blue Pages – The strict real-world Cardano project directory. Only projects with revenue, real users, or government/enterprise adoption. No hype. No memecoins.">
     <meta property="og:title" content="Blue Pages – Cardano Real-World Utility Directory">
     <meta property="og:description" content="71 verified Cardano projects with real revenue, users, or enterprise adoption as of Nov 20, 2025. Proof included.">
     <meta property="og:image" content="https://bluepagesada.github.io/Bluepagesada/og-preview.jpg">
@@ -18,30 +18,34 @@
 </head>
 <body>
 
-    <!-- Hero -->
-    <section class="hero text-center">
-        <div class="container">
-            <div class="mb-5 logo-svg">
-                <svg class="img-fluid" viewBox="0 0 380 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-                  <defs>
-                    <linearGradient id="grad"><stop offset="0%" stop-color="#002D72"/><stop offset="100%" stop-color="#00D4FF"/></linearGradient>
-                  </defs>
-                  <path d="M15 50 L50 28 L85 50 L50 72 Z" fill="url(#grad)" stroke="#002D72" stroke-width="5"/>
-                  <path d="M40 42 L50 55 L60 42 Z" fill="white"/>
-                  <text x="105" y="65" font-size="56" font-weight="900" fill="white">Blue</text>
-                  <text x="215" y="65" font-size="56" font-weight="300" fill="white">Pages</text>
-                </svg>
-            </div>
-            <p class="lead mb-4 fw-medium">The strict real-world Cardano directory.<br class="d-none d-md-block">Only projects with revenue, real users, or enterprise contracts. Proof required.</p>
-            <p class="fs-5 mb-4">As of <span id="update-date">November 20, 2025</span> – <strong id="project-count">71 projects</strong> – verified daily</p>
-            <div class="gap-3 d-flex justify-content-center flex-wrap">
-                <a href="#projects" class="btn btn-light btn-lg">Explore Projects →</a>
-                <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#submitModal">Submit Project</button>
-                <button id="themeToggle" class="btn btn-outline-light btn-lg"><i class="bi bi-moon-stars-fill"></i></button>
+    <!-- Hero - PERFECTLY MATCHES YOUR SCREENSHOT -->
+    <section class="hero text-center text-white">
+        <div class="container py-5">
+            <div class="row justify-content-center align-items-center min-vh-100 min-vh-md-80">
+                <div class="col-lg-10">
+                    <!-- Logo + Title Row -->
+                    <div class="d-flex align-items-center justify-content-center mb-4 logo-header">
+                        <img src="https://i.imgur.com/5t3e9Qj.png" alt="Blue Pages Logo" class="hero-logo me-4">
+                        <h1 class="display-1 fw-bold mb-0">Blue<span class="fw-light">Pages</span></h1>
+                    </div>
+                    <p class="lead fw-medium mb-4 opacity-95">
+                        The strict real-world Cardano directory.<br class="d-none d-md-block">
+                        Only projects with revenue, real users, or enterprise contracts. Proof required.
+                    </p>
+                    <p class="fs-4 mb-5 opacity-90">
+                        As of <span id="update-date">November 20, 2025</span> – <strong id="project-count">71 projects</strong> – verified daily
+                    </p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="#projects" class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-semibold">Explore Projects →</a>
+                        <button class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#submitModal">Submit Project</button>
+                        <button id="themeToggle" class="btn btn-outline-light btn-lg rounded-pill"><i class="bi bi-moon-stars-fill"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Rest of the site (unchanged from nuclear version) -->
     <!-- Verification Alert -->
     <div class="container my-5">
         <div class="alert alert-info text-center fw-bold fs-5">
@@ -67,7 +71,6 @@
     </div>
 
     <!-- Category Tabs -->
-    -->
     <div class="container mb-5">
         <ul class="nav nav-pills nav-fill justify-content-center flex-wrap gap-2" id="categoryTabs">
             <li class="nav-item"><a class="nav-link active" href="#all" data-cat="all">All</a></li>
@@ -83,7 +86,7 @@
         </ul>
     </div>
 
-    <!-- Projects Grid -->
+    <!-- Projects Grid + Skeleton -->
     <div class="container my-5" id="projects">
         <div id="loadingSkeleton" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <div class="col" v-for="i in 9"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-5"></span></div></div></div>
@@ -135,7 +138,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-center py-5">
+    <footer class="text-center py-5 bg-dark text-white">
         <div class="container">
             <p class="fw-bold fs-4 mb-3">Donate to Support Blue Pages</p>
             <button id="copyBtn" class="btn btn-outline-light btn-lg mb-3">
