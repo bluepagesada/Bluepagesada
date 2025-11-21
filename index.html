@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blue Pages – The strict real-world Cardano project directory. Only projects with revenue, real users, or enterprise adoption. No hype. No memecoins.">
+    <meta name="description" content="Blue Pages – The strict real-world Cardano project directory. Only projects with revenue, real users, or government/enterprise adoption. No hype. No memecoins.">
     <meta property="og:title" content="Blue Pages – Cardano Real-World Utility Directory">
     <meta property="og:description" content="71 verified Cardano projects with real revenue, users, or enterprise adoption as of Nov 20, 2025. Proof included.">
     <meta property="og:image" content="https://bluepagesada.github.io/Bluepagesada/og-preview.jpg">
@@ -18,16 +18,33 @@
 </head>
 <body>
 
-    <!-- Hero - PERFECTLY MATCHES YOUR SCREENSHOT -->
+    <!-- Hero - TIGHT, PERFECT HERO MATCHING YOUR SCREENSHOT -->
     <section class="hero text-center text-white">
-        <div class="container py-5">
-            <div class="row justify-content-center align-items-center min-vh-100 min-vh-md-80">
-                <div class="col-lg-10">
-                    <!-- Logo + Title Row -->
-                    <div class="d-flex align-items-center justify-content-center mb-4 logo-header">
-                        <img src="https://i.imgur.com/5t3e9Qj.png" alt="Blue Pages Logo" class="hero-logo me-4">
-                        <h1 class="display-1 fw-bold mb-0">Blue<span class="fw-light">Pages</span></h1>
+        <div class="container">
+            <div class="row justify-content-center align-items-center" style="min-height:80vh;">
+                <div class="col-lg-10 col-xxl-8">
+                    <div class="d-flex align-items-center justify-content-center mb-4">
+                        <!-- Exact logo from your screenshot - inline SVG, never breaks -->
+                        <svg width="160" height="160" viewBox="0 0 160 160" class="hero-logo me-4" xmlns="http://www.w3.org/2000/svg">
+                            <g transform="translate(80,80)">
+                                <rect x="-70" y="-70" width="140" height="140" rx="20" fill="#002D72" transform="rotate(45)"/>
+                                <polygon points="0,-40 35,25 -35,25" fill="white"/>
+                            </g>
+                            <filter id="shadow">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+                                <feOffset dx="0" dy="10" result="offsetblur"/>
+                                <feFlood flood-color="rgba(0,0,0,0.5)"/>
+                                <feComposite in2="offsetblur" operator="in"/>
+                                <feMerge>
+                                    <feMergeNode/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </svg>
                     </div>
+                    <h1 class="display-1 fw-bold mb-3">
+                        Blue<span class="fw-light">Pages</span>
+                    </h1>
                     <p class="lead fw-medium mb-4 opacity-95">
                         The strict real-world Cardano directory.<br class="d-none d-md-block">
                         Only projects with revenue, real users, or enterprise contracts. Proof required.
@@ -45,7 +62,7 @@
         </div>
     </section>
 
-    <!-- Rest of the site (unchanged from nuclear version) -->
+    <!-- Rest of site unchanged from nuclear version -->
     <!-- Verification Alert -->
     <div class="container my-5">
         <div class="alert alert-info text-center fw-bold fs-5">
@@ -86,7 +103,7 @@
         </ul>
     </div>
 
-    <!-- Projects Grid + Skeleton -->
+    <!-- Projects Grid -->
     <div class="container my-5" id="projects">
         <div id="loadingSkeleton" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <div class="col" v-for="i in 9"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-5"></span></div></div></div>
@@ -103,7 +120,7 @@
                 <ul class="list-unstyled">
                     <li>• Real revenue (protocol fees, paid APIs, sales) – source: DefiLlama or official financials</li>
                     <li>• Real users/TVL on mainnet – DefiLlama TVL > $1M or verified user metrics</li>
-                    <li>• Enterprise adoption – signed contract, live deployment, or official announcement</li>
+                    <li>• Government or enterprise adoption – signed contract, live deployment, or official announcement</li>
                 </ul>
                 <p class="mb-0">All data manually checked by @BluePagesADA. Projects are removed the day they no longer qualify. No exceptions.</p>
             </div>
