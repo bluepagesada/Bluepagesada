@@ -1,5 +1,5 @@
 :root {
-  --blue: #001f3f;
+  --blue: #002D72;
   --cyan: #00D4FF;
   --text: #212529;
   --bg: #f8f9fa;
@@ -23,23 +23,21 @@ body {
 
 .hero {
   background: linear-gradient(135deg, #001f3f 0%, #00a8e8 100%);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
+  color: white;
+  padding: 6rem 0 5rem;
 }
 
 .hero .container {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  max-width: 1200px;
 }
 
 .hero-logo {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   filter: drop-shadow(0 10px 30px rgba(0,0,0,0.6));
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .hero-logo {
     width: 180px;
     height: 180px;
@@ -47,10 +45,10 @@ body {
 }
 
 .hero h1 {
-  font-size: 5.5rem;
+  font-size: 6rem;
   font-weight: 900;
-  letter-spacing: -2px;
-  text-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  letter-spacing: -3px;
+  line-height: 1;
 }
 
 .hero h1 .fw-light {
@@ -58,19 +56,21 @@ body {
 }
 
 .hero .lead {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 500;
+  line-height: 1.4;
 }
 
 .hero .fs-4 {
-  font-size: 1.35rem !important;
+  font-size: 1.4rem !important;
   font-weight: 400;
 }
 
 .hero .btn {
   border-radius: 50px;
-  padding: 0.9rem 2rem;
+  padding: 0.9rem 2.2rem;
   font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .hero .btn-light {
@@ -97,7 +97,7 @@ body {
   height: 64px;
   object-fit: contain;
   border-radius: 12px;
-  background: #f0f0f0;
+  background: #f0f0;
 }
 
 .logo-placeholder {
@@ -139,17 +139,17 @@ body {
   font-size: 0.8rem;
 }
 
-/* Dark mode fixes */
 [data-theme="dark"] .badge-revenue { color: #212529; }
-[data-theme="dark"] .card img.logo, [data-theme="dark"] .logo-placeholder {
-  background: #333;
-}
 
 @media (max-width: 576px) {
   .hero h1 {
-    font-size: 4rem;
+    font-size: 4.5rem;
   }
   .hero .lead {
     font-size: 1.3rem;
+  }
+  .hero-logo {
+    width: 120px;
+    height: 120px;
   }
 }
