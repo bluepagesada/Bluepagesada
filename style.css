@@ -5,7 +5,7 @@
   --bg: #121212;
   --card-bg: #1e1e1e;
   --border: #333;
-  --text-muted: #bbb; /* perfect contrast */
+  --text-muted: #bbb;
 }
 
 [data-theme="light"] {
@@ -84,7 +84,7 @@ body {
   color: #001f3f;
 }
 
-/* CARDS – TALLER, MORE BREATHING ROOM */
+/* CARDS – TALLER, MORE BREATHING ROOM, 4 PER ROW ON LARGE SCREENS */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
