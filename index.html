@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Blue Pages – The strict real-world Cardano project directory. Only projects with revenue, real users, or government/enterprise adoption. No hype. No memecoins.">
     <meta property="og:title" content="Blue Pages – Cardano Real-World Utility Directory">
-    <meta property="og:description" content="The only Cardano directory that actually matters. 72 verified projects. Proof required.">
+    <meta property="og:description" content="The only Cardano directory that actually matters.">
     <meta property="og:image" content="https://bluepagesada.github.io/Bluepagesada/og-preview.jpg">
     <meta property="og:url" content="https://bluepagesada.github.io/Bluepagesada/">
     <meta name="theme-color" content="#002D72">
@@ -16,15 +16,20 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23002D72'/></svg>">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
-    <!-- HERO - PERFECT, TIGHT, NO WASTED SPACE -->
+    <!-- FIXED TOP RIGHT THEME TOGGLE -->
+    <div class="position-fixed top-0 end-0 p-3 z-3">
+        <button id="themeToggle" class="btn btn-outline-light rounded-circle p-3 shadow-lg">
+            <i class="bi bi-sun-fill"></i>
+        </button>
+    </div>
+
+    <!-- HERO -->
     <section class="hero text-center text-white d-flex align-items-center">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-xxl-8">
-
-                    <!-- Logo -->
                     <div class="text-center mb-4">
                         <svg width="220" height="220" viewBox="0 0 220 220" class="hero-logo" xmlns="http://www.w3.org/2000/svg">
                             <defs>
@@ -72,23 +77,23 @@
         </div>
     </section>
 
-    <!-- MAIN NAV TABS (replaces buttons) -->
+    <!-- MAIN NAV TABS -->
     <div class="container my-5">
-        <ul class="nav nav-tabs nav-fill border-0" id="mainTabs" role="tablist">
+        <ul class="nav nav-tabs nav-fill border-0 shadow-sm rounded" id="mainTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active fs-4 fw-semibold" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab">Home</button>
+                <button class="nav-link active fs-4 fw-semibold" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button">Home</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link fs-4 fw-semibold" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projectsTab" type="button" role="tab">Projects</button>
+                <button class="nav-link fs-4 fw-semibold" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projectsTab" type="button">Projects</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link fs-4 fw-semibold" id="quests-tab" data-bs-toggle="tab" data-bs-target="#quests" type="button" role="tab">Quests</button>
+                <button class="nav-link fs-4 fw-semibold" id="quests-tab" data-bs-toggle="tab" data-bs-target="#quests" type="button">Quests</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link fs-4 fw-semibold" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab">Contact</button>
+                <button class="nav-link fs-4 fw-semibold" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button">Contact</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link fs-4 fw-semibold" id="coming-tab" data-bs-toggle="tab" data-bs-target="#coming" type="button" role="tab">Coming Soon</button>
+                <button class="nav-link fs-4 fw-semibold" id="coming-tab" data-bs-toggle="tab" data-bs-target="#coming" type="button">Coming Soon</button>
             </li>
         </ul>
     </div>
@@ -96,37 +101,36 @@
     <!-- TAB CONTENT -->
     <div class="tab-content" id="mainTabContent">
 
-        <!-- HOME TAB -->
+        <!-- HOME TAB 1: HOME -->
         <div class="tab-pane fade show active" id="home" role="tabpanel">
             <div class="container py-5">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <h2 class="display-5 fw-bold text-center mb-5">Welcome to Blue Pages</h2>
-                        <p class="lead text-center mb-5">The only Cardano directory that removes more projects than it adds.<br>Real revenue. Real users. Real enterprise contracts. Proof required. No exceptions.</p>
-
-                        <div class="row g-5">
-                            <div class="col-md-6">
-                                <h3 class="h4 fw-bold">What is Blue Pages?</h3>
-                                <p>Blue Pages is the strictest, most trusted directory of Cardano projects that have proven real-world impact in 2025. We manually verify every entry using public data (DefiLlama, on-chain metrics, official reports). If it doesn't meet the bar, it's gone — no matter how loud the community is.</p>
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-8">
+                        <h2 class="display-5 fw-bold mb-4">The Real Cardano</h2>
+                        <p class="lead mb-5">Blue Pages is the only directory that removes projects when they stop shipping.<br>Only real revenue, real users, or real enterprise/government adoption make the cut.</p>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="display-4 fw-bold text-primary">72</div>
+                                <p class="fs-5">Verified Projects</p>
                             </div>
-                            <div class="col-md-6">
-                                <h3 class="h4 fw-bold">Why Cardano?</h3>
-                                <p>Cardano is the only layer-1 blockchain built on peer-reviewed research with a focus on security, sustainability, and real-world adoption. From government IDs in Ethiopia to enterprise supply chain with Scantrust and Lufthansa, Cardano is quietly becoming the backbone of real institutions — while others chase memes.</p>
+                            <div class="col-md-4">
+                                <div class="display-4 fw-bold text-primary">0</div>
+                                <p class="fs-5">Memecoins Allowed</p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="display-4 fw-bold text-primary">∞</div>
+                                <p class="fs-5">Bullshit Tolerance</p>
                             </div>
                         </div>
-
-                        <div class="text-center my-5">
-                            <div class="fs-1 fw-bold text-primary mb-3">72 Projects Verified</div>
-                            <p class="fs-5 text-muted">As of November 21, 2025 – and growing only when something actually ships</p>
-                        </div>
+                        <p class="mt-5 fs-5 text-muted">Curated daily by @BluePagesADA — the filter Cardano deserves.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- PROJECTS TAB -->
+        <!-- TAB 2: PROJECTS -->
         <div class="tab-pane fade" id="projectsTab" role="tabpanel">
-            <!-- Search + Sort -->
+            <!-- Search + Sort (same as before) -->
             <div class="container search-box mb-4">
                 <div class="row g-3 align-items-center">
                     <div class="col-lg-8">
@@ -142,7 +146,7 @@
                 </div>
             </div>
 
-            <!-- Category Tabs inside Projects tab -->
+            <!-- Category Tabs inside Projects -->
             <div class="container mb-5">
                 <ul class="nav nav-pills nav-fill justify-content-center flex-wrap gap-2" id="categoryTabs">
                     <li class="nav-item"><a class="nav-link active" href="#all" data-cat="all">All</a></li>
@@ -156,17 +160,20 @@
                     <li class="nav-item"><a class="nav-link" href="#infra" data-cat="infra">Infra</a></li>
                     <li class="nav-item"><a class="nav-link" href="#nft" data-cat="nft">NFT</a></li>
                     <li class="nav-item"><a class="nav-link" href="#gaming" data-cat="gaming">Gaming</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#other" data-cat="other">Other</a></li>
                 </ul>
             </div>
 
-            <!-- Projects Grid -->
+            <!-- Projects Grid (enhanced cards coming from script.js) -->
             <div class="container my-5">
                 <div id="loadingSkeleton" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <!-- skeleton cards -->
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-5"></span></div></div></div>
+                    <!-- repeat 8 more -->
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
-                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div></div>
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
@@ -176,52 +183,75 @@
             </div>
         </div>
 
-        <!-- QUESTS TAB (blank for now) -->
+        <!-- TAB 3: QUESTS -->
         <div class="tab-pane fade" id="quests" role="tabpanel">
             <div class="container py-5">
                 <div class="text-center py-5">
-                    <h2 class="display-5 fw-bold">Quests Board</h2>
-                    <p class="lead text-muted">Coming Q1 2026 – community bounties, tasks, and rewards for contributing to Cardano real-world adoption</p>
+                    <h2 class="display-5 fw-bold">Quests Board – Coming Q1 2026</h2>
+                    <p class="lead text-muted">Community bounty board • classifieds • tasks • rewards<br>Submit quests via Contact form for now</p>
                 </div>
             </div>
         </div>
 
-        <!-- CONTACT TAB -->
+        <!-- TAB 4: CONTACT -->
         <div class="tab-pane fade" id="contact" role="tabpanel">
             <div class="container py-5">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <h2 class="text-center mb-5">Contact & Submissions</h2>
 
-                        <div class="card mb-5">
-                            <div class="card-body">
-                                <h4>Submit a Project</h4>
-                                <form action="https://formsubmit.co/bluepagesada@gmail.com" method="POST">
-                                    <input type="hidden" name="_captcha" value="false">
-                                    <input type="hidden" name="_subject" value="Blue Pages Project Submission">
-                                    <input type="hidden" name="_next" value="https://bluepagesada.github.io/Bluepagesada/">
-                                    <div class="mb-3"><label>Project Name *</label><input type="text" class="form-control" name="Project Name" required></div>
-                                    <div class="mb-3"><label>Website *</label><input type="url" class="form-control" name="Website" required></div>
-                                    <div class="mb-3"><label>X Handle</label><input type="text" class="form-control" name="X Handle"></div>
-                                    <div class="mb-3"><label>Short Description *</label><textarea class="form-control" name="Description" rows="3" required></textarea></div>
-                                    <div class="mb-3"><label>Proof of Real-World Impact (links, DefiLlama, etc.) *</label><textarea class="form-control" name="Proof" rows="5" required></textarea></div>
-                                    <div class="mb-3"><label>Your Email *</label><input type="email" class="form-control" name="email" required></div>
-                                    <button type="submit" class="btn btn-primary">Submit for Review</button>
-                                </form>
+                        <div class="text-center mb-5">
+                            <button class="btn btn-primary btn-lg me-3" data-bs-toggle="collapse" data-bs-target="#projectForm">Submit Project</button>
+                            <button class="btn btn-outline-primary btn-lg me-3" data-bs-toggle="collapse" data-bs-target="#feedbackForm">Send Feedback</button>
+                            <button class="btn btn-outline-primary btn-lg" data-bs-toggle="collapse" data-bs-target="#questForm">Submit Quest (soon)</button>
+                        </div>
+
+                        <!-- Project Submission Form -->
+                        <div class="collapse" id="projectForm">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h4>Submit Project for Verification</h4>
+                                    <form action="https://formsubmit.co/bluepagesada@gmail.com" method="POST">
+                                        <input type="hidden" name="_captcha" value="false">
+                                        <input type="hidden" name="_subject" value="Blue Pages Project Submission">
+                                        <input type="hidden" name="_next" value="https://bluepagesada.github.io/Bluepagesada/#contact">
+                                        <div class="mb-3"><label>Project Name *</label><input type="text" class="form-control" name="Project Name" required></div>
+                                        <div class="mb-3"><label>Website *</label><input type="url" class="form-control" name="Website" required></div>
+                                        <div class="mb-3"><label>X Handle</label><input type="text" class="form-control" name="X Handle"></div>
+                                        <div class="mb-3"><label>Industry/Category *</label><input type="text" class="form-control" name="Category" required></div>
+                                        <div class="mb-3"><label>Short Description *</label><textarea class="form-control" name="Description" rows="3" required></textarea></div>
+                                        <div class="mb-3"><label>Proof of Real-World Impact (links, TVL, revenue, etc.) *</label><textarea class="form-control" name="Proof" rows="6" required></textarea></div>
+                                        <div class="mb-3"><label>Logo URL (optional)</label><input type="url" class="form-control" name="Logo URL"></div>
+                                        <div class="mb-3"><label>Your Email *</label><input type="email" class="form-control" name="email" required></div>
+                                        <button type="submit" class="btn btn-primary">Submit for Review</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <h4>Send Feedback</h4>
-                                <form action="https://formsubmit.co/bluepagesada@gmail.com" method="POST">
-                                    <input type="hidden" name="_captcha" value="false">
-                                    <input type="hidden" name="_subject" value="Blue Pages Feedback">
-                                    <input type="hidden" name="_next" value="https://bluepagesada.github.io/Bluepagesada/">
-                                    <div class="mb-3"><label>Your Message</label><textarea class="form-control" name="Message" rows="5" required></textarea></div>
-                                    <div class="mb-3"><label>Your Email (optional)</label><input type="email" class="form-control" name="email"></div>
-                                    <button type="submit" class="btn btn-outline-primary">Send Feedback</button>
-                                </form>
+                        <!-- Feedback Form -->
+                        <div class="collapse" id="feedbackForm">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h4>Send Feedback or Report Issue</h4>
+                                    <form action="https://formsubmit.co/bluepagesada@gmail.com" method="POST">
+                                        <input type="hidden" name="_captcha" value="false">
+                                        <input type="hidden" name="_subject" value="Blue Pages Feedback">
+                                        <input type="hidden" name="_next" value="https://bluepagesada.github.io/Bluepagesada/#contact">
+                                        <div class="mb-3"><label>Your Message</label><textarea class="form-control" name="Message" rows="5" required></textarea></div>
+                                        <div class="mb-3"><label>Your Email (optional)</label><input type="email" class="form-control" name="email"></div>
+                                        <button type="submit" class="btn btn-outline-primary">Send</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quest Form (placeholder) -->
+                        <div class="collapse" id="questForm">
+                            <div class="card mb-4">
+                                <div class="card-body text-center text-muted">
+                                    <p>Quest Board submission coming Q1 2026<br><small>Check back soon</small></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -229,17 +259,18 @@
             </div>
         </div>
 
-        <!-- COMING SOON TAB -->
+        <!-- TAB 5: COMING SOON -->
         <div class="tab-pane fade" id="coming" role="tabpanel">
             <div class="container py-5">
                 <div class="text-center py-5">
                     <h2 class="display-4 fw-bold">Coming Soon™</h2>
                     <p class="lead text-muted mt-4">Real features. Real timelines. Real soon.</p>
+                    <p class="fs-5 text-muted">Quests Board • Verified Badges • Community Submissions • Leaderboards • API</p>
                 </div>
             </div>
         </div>
 
-    </div> <!-- end tab-content -->
+    </div>
 
     <!-- Footer -->
     <footer class="text-center py-5 bg-dark text-white mt-auto">
