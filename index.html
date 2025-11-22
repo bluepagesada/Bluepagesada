@@ -20,7 +20,7 @@
 
     <!-- TOP RIGHT THEME TOGGLE -->
     <div class="position-fixed top-0 end-0 p-3 z-3">
-        <button id="themeToggle" class="btn btn-outline-light rounded-circle p- p-3 shadow-lg">
+        <button id="themeToggle" class="btn btn-outline-light rounded-circle p-3 shadow-lg">
             <i class="bi bi-sun-fill"></i>
         </button>
     </div>
@@ -153,7 +153,7 @@
             <div class="container search-box mb-4">
                 <div class="row g-3 align-items-center">
                     <div class="col-lg-8">
-                        <input type="text" id="searchInput" class="form-control form-control-lg shadow" placeholder="Search projects..." autocomplete="off">
+                        <input type="text" id="searchInput" class="form-control form-control-lg shadow" placeholder="Search projects..." autocomplete="off>
                     </div>
                     <div class="col-lg-4">
                         <select id="sortSelect" class="form-select form-select-lg">
@@ -182,9 +182,10 @@
                 </ul>
             </div>
 
-            <!-- Projects Grid -->
+            <!-- Projects Grid – NOW 4 PER ROW ON LARGE SCREENS -->
             <div class="container my-5">
-                <div id="loadingSkeleton" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div id="loadingSkeleton" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5">
+                    <!-- skeleton cards -->
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-5"></span></div></div></div>
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
@@ -195,7 +196,7 @@
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
                     <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
                 </div>
-                <div id="projectsGrid" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" style="display:none;"></div>
+                <div id="projectsGrid" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5" style="display:none;"></div>
             </div>
         </div>
 
@@ -203,7 +204,7 @@
         <div class="tab-pane fade" id="quests" role="tabpanel">
             <div class="container py-5">
                 <div class="text-center py-5">
-                    <h2 class="display-5 fw-bold">Quests Board – Community Forum Style (Coming Q1 2026)</h2>
+                    <h2 class="display-5 fw-bold">Quests Board – Community Forum (Coming Q1 2026)</h2>
                     <p class="lead text-muted">Community bounty board • classifieds • tasks • rewards<br>Submit quests via Contact form for now</p>
                 </div>
             </div>
