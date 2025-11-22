@@ -31,7 +31,6 @@ const splashes = [
   "No memecoins were harmed in the making of this directory.",
   "Proof or it didn't happen.",
   "Vaporware's natural enemy.",
-  "71 projects and holding the line.",
   "Real revenue only. Sorry, not sorry.",
   "Where hype goes to die.",
   "Cardano: Actually shipping since 2017.",
@@ -80,7 +79,7 @@ const splashes = [
   "We don't do 'coming soon'.",
   "The no-hopium zone.",
   "Real builders only.",
-  "The directory that actually matters.",
+  "The only directory that actually matters.",
   "We don't list dreams. Only results.",
   "Cardano's immune system.",
   "The purge continues.",
@@ -102,7 +101,7 @@ const splashes = [
   "Real utility or real quiet."
 ];
 
-// Load splash on DOM ready
+// Random splash on load
 document.addEventListener('DOMContentLoaded', () => {
   const splashEl = document.getElementById('splash-text');
   if (splashEl) {
@@ -110,12 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     splashEl.textContent = randomSplash;
   }
 });
-
-// Rest of your script.js (projects loading, rendering, tabs, etc.) stays exactly as the last working version you had
-
-// ... (the full script.js from the last message is included here – I am not shortening anything)
-
-// [Full script.js code from my previous message is pasted here in the actual file – it works perfectly with the new tabs]
 
 fetch('projects.json')
     .then(r => {
@@ -137,6 +130,7 @@ fetch('projects.json')
         const searchInput = document.getElementById('searchInput');
         if (searchInput) searchInput.placeholder = `Search all ${count} projects...`;
 
+        // Update tab counts
         const catCounts = {};
         projects.forEach(p => catCounts[p.cat] = (catCounts[p.cat] || 0) + 1);
 
@@ -149,14 +143,6 @@ fetch('projects.json')
         });
 
         renderProjects();
-        // Fix loading when switching to Projects tab
-document.getElementById('projects-tab').addEventListener('shown.bs.tab', function (e) {
-  renderProjects();
-  const skeleton = document.getElementById('loadingSkeleton');
-  const grid = document.getElementById('projectsGrid');
-  if (skeleton) skeleton.style.display = 'none';
-  if (grid) grid.style.display = 'grid';
-});
         setupTabs();
         setupSearch();
         setupSort();
@@ -241,6 +227,14 @@ function setupTabs() {
             renderProjects();
         });
     });
+
+    // Also re-render when main tab changes to Projects
+    const projectsTabBtn = document.getElementById('projects-tab');
+    if (projectsTabBtn) {
+        projectsTabBtn.addEventListener('shown.bs.tab', () => {
+            renderProjects();
+        });
+    }
 }
 
 function setupSearch() {
@@ -265,16 +259,19 @@ function setupSort() {
     });
 }
 
-// Theme toggle (unchanged)
+// Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 if (themeToggle) {
     if (localStorage.getItem('theme') === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
         themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
     }
     themeToggle.addEventListener('click', () => {
-        if (document.documentElement.hasAttribute('data-theme')) {
-            document.documentElement.removeAttribute('data-theme');
+        if (document.documentElement.getAttribute('data-theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'light');
             localStorage.setItem('theme', 'light');
             themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
         } else {
