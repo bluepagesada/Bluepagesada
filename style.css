@@ -5,7 +5,7 @@
   --bg: #121212;
   --card-bg: #1e1e1e;
   --border: #333;
-  --text-muted: #bbb; /* perfect contrast in dark mode */
+  --text-muted: #bbb;
 }
 
 [data-theme="light"] {
@@ -169,10 +169,6 @@ body {
 [data-theme="dark"] .card {
   background: #1e1e1e;
   border-color: #333;
-}
-
-[data-theme="dark"] .badge-revenue {
-  color: #212529;
 }
 
 [data-theme="dark"] .card img.logo,
