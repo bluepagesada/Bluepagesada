@@ -176,6 +176,26 @@ body {
   background: #333;
 }
 
+/* NEW BADGE STYLES */
+.badge-purple {
+  background-color: #6f42c1 !important;
+}
+.badge-physical {
+  background-color: #fd7e14 !important;
+  color: white !important;
+}
+.badge-digital {
+  background-color: #0dcaf0 !important;
+  color: black !important;
+}
+.project-card .badge {
+  font-size: 0.75rem !important;
+  padding: 0.35em 0.65em;
+}
+.project-card .badge:hover {
+  transform: scale(1.1);
+}
+
 /* Mobile */
 @media (max-width: 576px) {
   .hero h1 {
