@@ -1,6 +1,39 @@
 :root {
   --blue: #002D72;
   --cyan: #00D4FF;
+  --text: #e9ecef;
+  --bg: #121212;
+  --card-bg: #1e1e1e;
+  --border: #333;
+  --text-muted: #888;
+}
+
+[data-theme="light"] {
+  --text: #212529;
+  --bg: #f8f9fa;
+  --card-bg: #ffffff;
+  --border: #e0e0e0;
+  --text-muted: #666;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.3s;
+  font-family: system-ui,-apple-system,sans-serif;
+}
+
+.hero {
+  background: linear-gradient(135deg, #001f3f 0%, #00a8e8 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:root {
+  --blue: #002D72;
+  --cyan: #00D4FF;
   --text: #212529;
   --bg: #f8f9fa;
   --card-bg: #ffffff;
