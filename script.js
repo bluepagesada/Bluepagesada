@@ -26,7 +26,7 @@ const categories = {
     other: "Other Real-World Use Cases"
 };
 
-// Random splash texts
+// Random splash texts (Minecraft style)
 const splashes = [
   "No memecoins were harmed in the making of this directory.",
   "Proof or it didn't happen.",
