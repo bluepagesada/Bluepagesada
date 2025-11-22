@@ -149,6 +149,14 @@ fetch('projects.json')
         });
 
         renderProjects();
+        // Fix loading when switching to Projects tab
+document.getElementById('projects-tab').addEventListener('shown.bs.tab', function (e) {
+  renderProjects();
+  const skeleton = document.getElementById('loadingSkeleton');
+  const grid = document.getElementById('projectsGrid');
+  if (skeleton) skeleton.style.display = 'none';
+  if (grid) grid.style.display = 'grid';
+});
         setupTabs();
         setupSearch();
         setupSort();
