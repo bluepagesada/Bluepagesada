@@ -228,33 +228,13 @@ function setupTabs() {
         });
     });
 
-    // Also re-render when main tab changes to Projects
+    // Fix loading when switching to Projects tab
     const projectsTabBtn = document.getElementById('projects-tab');
     if (projectsTabBtn) {
         projectsTabBtn.addEventListener('shown.bs.tab', () => {
             renderProjects();
         });
     }
-}
-
-function generateJSON() {
-  const form = document.forms[0]; // the project form
-  const data = {
-    name: form["Project Name"].value,
-    desc: form["Description"].value,
-    link: form["Website"].value,
-    twitter: form["X Handle"].value || null,
-    tags: ["Revenue"], // you can make this smarter later
-    cat: form["Category"].value.toLowerCase().replace(" & ", " ").split(" ")[0],
-    logo: form["Logo URL"].value || "",
-    metrics: form["Metrics"].value || "",
-    proof: form["Proof"].value,
-    proofText: form["Proof Text"].value || "Source",
-    impactScore: 80, // default
-    verified: false,
-    type: form["Type"].value || "Digital"
-  };
-  document.getElementById('generatedJSON').value = JSON.stringify(data, null, 2);
 }
 
 function setupSearch() {
