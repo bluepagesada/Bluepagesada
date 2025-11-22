@@ -7,9 +7,9 @@ let currentFilter = "all";
 let currentSort = "impact";
 
 const tagClasses = {
-    "Revenue": "badge-revenue",
-    "Enterprise": "badge-enterprise",
-    "Government": "badge-gov"
+    "Revenue": "text-bg-success",
+    "Enterprise": "text-bg-primary",
+    "Government": "text-bg-purple badge-purple"
 };
 
 const categories = {
@@ -26,9 +26,8 @@ const categories = {
     other: "Other Real-World Use Cases"
 };
 
-// Random splash texts (Minecraft style)
 const splashes = [
-  "No memecoins were harmed in the making of this directory.",
+ "No memecoins were harmed in the making of this directory.",
   "Proof or it didn't happen.",
   "Vaporware's natural enemy.",
   "Real revenue only. Sorry, not sorry.",
@@ -101,16 +100,11 @@ const splashes = [
   "Real utility or real quiet."
 ];
 
-// Random splash on load
 document.addEventListener('DOMContentLoaded', () => {
   const splashEl = document.getElementById('splash-text');
-  if (splashEl) {
-    const randomSplash = splashes[Math.floor(Math.random() * splashes.length)];
-    splashEl.textContent = randomSplash;
-  }
-});
+  if (splashEl) splashEl.textContent = splashes[Math.floor(Math.random() * splashes.length)];
 
-fetch('projects.json')
+  fetch('projects.json')
     .then(r => {
         if (!r.ok) throw new Error('projects.json not found or invalid');
         return r.json();
@@ -119,27 +113,18 @@ fetch('projects.json')
         projects = data;
 
         const count = projects.length;
-        const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        document.getElementById('project-count').textContent = `${count} projects`;
+        document.getElementById('update-date').textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        document.getElementById('searchInput').placeholder = `Search all ${count} projects...`;
 
-        const projectCountEl = document.getElementById('project-count');
-        if (projectCountEl) projectCountEl.textContent = `${count} projects`;
-
-        const updateDateEl = document.getElementById('update-date');
-        if (updateDateEl) updateDateEl.textContent = dateStr;
-
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput) searchInput.placeholder = `Search all ${count} projects...`;
-
-        // Update tab counts
+        // Update category counts cleanly
         const catCounts = {};
         projects.forEach(p => catCounts[p.cat] = (catCounts[p.cat] || 0) + 1);
-
         document.querySelectorAll('#categoryTabs a[data-cat]').forEach(link => {
-            if (!link) return;
             const cat = link.getAttribute('data-cat');
-            const title = cat === 'all' ? 'All' : (categories[cat] || cat.charAt(0).toUpperCase() + cat.slice(1));
-            const tabCount = cat === 'all' ? count : (catCounts[cat] || 0);
-            link.textContent = `${title} (${tabCount})`;
+            const count = cat === 'all' ? projects.length : (catCounts[cat] || 0);
+            const title = cat === 'all' ? 'All' : categories[cat] || cat;
+            link.innerHTML = `${title} <span class="text-muted">(${count})</span>`;
         });
 
         renderProjects();
@@ -147,18 +132,18 @@ fetch('projects.json')
         setupSearch();
         setupSort();
 
-        const skeleton = document.getElementById('loadingSkeleton');
-        if (skeleton) skeleton.style.display = 'none';
-        const grid = document.getElementById('projectsGrid');
-        if (grid) grid.style.display = 'grid';
+        document.getElementById('loadingSkeleton').style.display = 'none';
+        document.getElementById('projectsGrid').style.display = 'grid';
     })
     .catch(err => {
-        console.error(err);
-        const projectsContainer = document.getElementById('projects');
-        if (projectsContainer) {
-            projectsContainer.innerHTML = '<div class="alert alert-danger text-center">Failed to load projects.json – check console</div>';
-        }
+        console.error('JSON Error:', err);
+        document.getElementById('loadingSkeleton').innerHTML = `
+          <div class="col-12 text-center py-5 text-danger fw-bold fs-3">
+            projects.json is fucked.<br>
+            <small class="text-muted">Fix the syntax you magnificent bastard.</small>
+          </div>`;
     });
+});
 
 function renderProjects() {
     const grid = document.getElementById('projectsGrid');
@@ -171,8 +156,8 @@ function renderProjects() {
         if (currentSort === "impact") return (b.impactScore || 0) - (a.impactScore || 0);
         if (currentSort === "name") return a.name.localeCompare(b.name);
         if (currentSort === "tvl") {
-            const aVal = a.metrics ? parseFloat(a.metrics.match(/\$([0-9.]+)/)?.[1] || 0) : 0;
-            const bVal = b.metrics ? parseFloat(b.metrics.match(/\$([0-9.]+)/)?.[1] || 0) : 0;
+            const aVal = a.metrics ? parseFloat(a.metrics.match(/\$([0-9,.]+)/)?.[1]?.replace(/,/g,'') || 0) : 0;
+            const bVal = b.metrics ? parseFloat(b.metrics.match(/\$([0-9,.]+)/)?.[1]?.replace(/,/g,'') || 0) : 0;
             return bVal - aVal;
         }
         return 0;
@@ -185,10 +170,10 @@ function renderProjects() {
             <div class="card h-100 project-card shadow-sm border-0">
                 <div class="card-body d-flex flex-column p-4">
                     <div class="d-flex align-items-start mb-3">
-                        ${p.logo ? `<img src="${p.logo}" alt="${p.name} logo" class="logo me-3 flex-shrink-0">` : `<div class="logo-placeholder me-3 flex-shrink-0"></div>`}
+                        ${p.logo ? `<img src="${p.logo}" alt="${p.name} logo" class="logo me-3 flex-shrink-0">` : `<div class="logo-placeholder me-3 flex-shrink-0">${p.name.charAt(0)}</div>`}
                         <div class="flex-grow-1">
                             <h5 class="fw-bold mb-1">${p.name}</h5>
-                            <small class="text-muted text-uppercase fw-semibold">${categories[p.cat] || p.cat}</small>
+                            <small class="text-muted text-uppercase fw-semibold">${categories[p.cat] || p.cat.toUpperCase()}</small>
                         </div>
                     </div>
 
@@ -196,8 +181,10 @@ function renderProjects() {
 
                     <div class="metrics fw-bold text-primary mb-3">${p.metrics || 'Live on Cardano mainnet'}</div>
 
-                    <div class="mb-3">
-                        ${p.tags.map(t => `<span class="badge ${tagClasses[t] || 'badge-defi'} me-1">${t}</span>`).join('')}
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        ${p.tags ? p.tags.map(t => `<span class="badge ${tagClasses[t] || 'text-bg-secondary'}">${t}</span>`).join('') : ''}
+                        <span class="badge ${p.verified ? 'text-bg-success' : 'text-bg-warning text-dark'}">${p.verified ? '✓ Verified' : '⚠ Pending'}</span>
+                        ${p.type ? `<span class="badge ${p.type === 'Physical' ? 'badge-physical' : 'badge-digital'}">${p.type === 'Physical' ? '🌍 Physical' : '💻 Digital'}</span>` : ''}
                     </div>
 
                     <div class="proof-link small mb-3">
@@ -228,7 +215,6 @@ function setupTabs() {
         });
     });
 
-    // Fix loading when switching to Projects tab
     const projectsTabBtn = document.getElementById('projects-tab');
     if (projectsTabBtn) {
         projectsTabBtn.addEventListener('shown.bs.tab', () => {
@@ -245,7 +231,7 @@ function setupSearch() {
         document.querySelectorAll('.project-card').forEach(card => {
             const text = card.textContent.toLowerCase();
             const col = card.closest('.col');
-            col.style.display = text.includes(term) ? '' : 'none';
+            if (col) col.style.display = text.includes(term) ? '' : 'none';
         });
     });
 }
