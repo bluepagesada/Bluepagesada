@@ -5,7 +5,7 @@
   --bg: #121212;
   --card-bg: #1e1e1e;
   --border: #333;
-  --text-muted: #888;
+  --text-muted: #aaa; /* improved contrast */
 }
 
 [data-theme="light"] {
@@ -19,8 +19,6 @@
 body {
   background: var(--bg);
   color: var(--text);
-  transition: all 0.3s;
-  font-family: system-ui,-apple-system,sans-serif;
 }
 
 .hero {
