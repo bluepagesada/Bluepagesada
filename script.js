@@ -27,7 +27,7 @@ const categories = {
 };
 
 const splashes = [
-  "No memecoins were harmed in the making of this directory.",
+   "No memecoins were harmed in the making of this directory.",
   "Proof or it didn't happen.",
   "Vaporware's natural enemy.",
   "Real revenue only. Sorry, not sorry.",
@@ -131,7 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const count = projects.length;
         document.getElementById('project-count').textContent = `${count} projects`;
-        const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        
+        const today = new Date();
+        const dateStr = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
         document.getElementById('update-date').textContent = dateStr;
 
         document.getElementById('searchInput').placeholder = `Search all ${count} projects...`;
@@ -147,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         renderProjects();
+        setupTabs();
         setupTabs();
         setupSearch();
         setupSort();
@@ -183,6 +186,8 @@ function renderProjects() {
         }
     });
 
+    const verifiedDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
     filtered.forEach(p => {
         const col = document.createElement('div');
         col.className = 'col';
@@ -203,8 +208,8 @@ function renderProjects() {
 
                     <div class="d-flex flex-wrap gap-2 mb-3">
                         ${p.tags ? p.tags.map(t => `<span class="badge ${tagClasses[t] || 'text-bg-secondary'}">${t}</span>`).join('') : ''}
-                        <span class="badge text-bg-success">✓ Verified Nov 22, 2025</span>
-                        ${p.type ? `<span class="badge ${p.type === 'Physical' ? 'badge-physical' : 'badge-digital'}">${p.type === 'Physical ? 'Physical' : 'Digital'}</span>` : ''}
+                        <span class="badge text-bg-success">✓ Verified ${verifiedDate}</span>
+                        ${p.type ? `<span class="badge ${p.type === 'Physical' ? 'badge-physical' : 'badge-digital'}">${p.type === 'Physical' ? 'Physical' : 'Digital'}</span>` : ''}
                     </div>
 
                     <div class="proof-link small mb-3">
@@ -215,7 +220,6 @@ function renderProjects() {
                         <a href="${p.link}" target="_blank" rel="noopener" class="btn btn-primary btn-sm flex-grow-1">Website</a>
                         ${p.twitter ? `<a href="https://twitter.com/${p.twitter}" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm"><i class="bi bi-twitter-x"></i></a>` : ''}
                     </div>
-
                 </div>
             </div>
         `;
@@ -272,16 +276,17 @@ if (themeToggle) {
         document.documentElement.setAttribute('data-theme', savedTheme);
         themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
     } else {
+        // default to dark
         document.documentElement.setAttribute('data-theme', 'dark');
         themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
     }
 
     themeToggle.addEventListener('click', () => {
         const current = document.documentElement.getAttribute('data-theme');
-        const newTheme = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        themeToggle.innerHTML = newTheme === 'dark' ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        themeToggle.innerHTML = next === 'dark' ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
     });
 }
 
