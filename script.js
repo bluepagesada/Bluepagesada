@@ -78,7 +78,7 @@ const splashes = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Random splash – works instantly
+    // Random savage splash
     const splashEl = document.getElementById('splash-text');
     if (splashEl) {
         splashEl.textContent = splashes[Math.floor(Math.random() * splashes.length)];
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetch('projects.json')
         .then(r => {
-            if (!r.ok) throw new Error('projects.json not found or invalid');
+            if (!r.ok) throw new Error('projects.json not found');
             return r.json();
         })
         .then(data => {
@@ -94,17 +94,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const count = projects.length;
 
-            // Update counters
+            // Update all counters
             document.getElementById('project-count').textContent = `${count} projects`;
-            document.getElementById('home-project-count').textContent = count;
+            const homeCountEl = document.getElementById('home-project-count');
+            if (homeCountEl) homeCountEl.textContent = count;
             document.getElementById('update-date').textContent = "November 22, 2025";
+
             if (document.getElementById('searchInput')) {
                 document.getElementById('searchInput').placeholder = `Search all ${count} projects...`;
             }
 
             // Category counts
             const catCounts = {};
-            projects.forEach(p => catCounts[p.cat] = (catCounts[p.cat] || 0) + 1);
+            projects.forEach(p => {
+                catCounts[p.cat] = (catCounts[p.cat] || 0) + 1;
+            });
 
             document.querySelectorAll('#categoryTabs a[data-cat]').forEach(link => {
                 const cat = link.getAttribute('data-cat');
@@ -124,16 +128,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (skeleton) skeleton.style.display = 'none';
             if (grid) grid.style.display = 'grid';
 
-            // Force render if page loaded directly on Projects tab
-            if (document.getElementById('projects-tab').classList.contains('active')) {
+            // Force render if directly on Projects tab
+            if (document.querySelector('#projects-tab.active')) {
                 renderProjects();
             }
         })
         .catch(err => {
-            console.error('JSON Error:', err);
+            console.error('JSON load failed:', err);
             const skeleton = document.getElementById('loadingSkeleton');
             if (skeleton) {
-                skeleton.innerHTML = `<div class="col-12 text-center py-5 text-danger fw-bold fs-3">projects.json is fucked.<br><small class="text-muted">Fix the syntax you magnificent bastard.</small></div>`;
+                skeleton.innerHTML = `<div class="col-12 text-center py-5 text-danger fw-bold fs-3">projects.json broken<br><small>Fix it you magnificent bastard</small></div>`;
             }
         });
 });
@@ -166,15 +170,15 @@ function renderProjects() {
             : `<div class="logo-placeholder me-3 flex-shrink-0">${p.name.charAt(0)}</div>`;
 
         const tagsHtml = p.tags 
-            ? p.tags.map(t => `<span class="badge ${tagClasses[t] || 'text-bg-secondary'}">${t}</span>`).join('') 
+            ? p.tags.map(t => `<span class="badge ${tagClasses[t] || 'text-bg-secondary'}">${t}</span>`).join('')
             : '';
 
         const verifiedBadge = p.verified 
-            ? '<span class="badge text-bg-success">✓ Verified</span>' 
+            ? '<span class="badge text-bg-success">✓ Verified</span>'
             : '<span class="badge text-bg-warning text-dark">⚠ Pending</span>';
 
         const typeBadge = p.type 
-            ? `<span class="badge ${p.type === 'Physical' ? 'badge-physical' : 'badge-digital'}">${p.type === 'Physical' ? '🌍 Physical' : '💻 Digital'}</span>` 
+            ? `<span class="badge ${p.type === 'Physical' ? 'badge-physical' : 'badge-digital'}">${p.type === 'Physical' ? '🌍 Physical' : '💻 Digital'}</span>`
             : '';
 
         col.innerHTML = `
@@ -227,10 +231,9 @@ function setupTabs() {
         });
     });
 
-    // Handle tab switch
-    const projectsTabBtn = document.getElementById('projects-tab');
-    if (projectsTabBtn) {
-        projectsTabBtn.addEventListener('shown.bs.tab', renderProjects);
+    const projectsTab = document.getElementById('projects-tab');
+    if (projectsTab) {
+        projectsTab.addEventListener('shown.bs.tab', renderProjects);
     }
 }
 
@@ -259,13 +262,12 @@ function setupSort() {
     });
 }
 
-// Theme toggle - fixed completely
+// Theme toggle – perfect
 const themeToggle = document.getElementById('themeToggle');
 if (themeToggle) {
     const root = document.documentElement;
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme === 'light') {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
         root.setAttribute('data-theme', 'light');
         themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
     } else {
@@ -291,10 +293,10 @@ const copyBtn = document.getElementById('copyBtn');
 if (copyBtn) {
     copyBtn.addEventListener('click', () => {
         navigator.clipboard.writeText(address);
-        const feedback = document.getElementById('copyFeedback');
-        if (feedback) {
-            feedback.style.opacity = 1;
-            setTimeout(() => feedback.style.opacity = 0, 2000);
+        const f = document.getElementById('copyFeedback');
+        if (f) {
+            f.style.opacity = 1;
+            setTimeout(() => f.style.opacity = 0, 2000);
         }
     });
 }
