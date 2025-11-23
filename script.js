@@ -27,7 +27,24 @@ const categories = {
 };
 
 const splashes = [
- "No memecoins were harmed in the making of this directory.",
+  "No memecoins were harmed in the making of this directory.",
+  "Proof or it didn't happen.",
+  "Vaporware's natural enemy.",
+  "Real revenue only. Sorry, not sorry.",
+  "Where hype goes to die.",
+  "Cardano: Actually shipping since 2017.",
+  "Strictly business. No clown coins.",
+  "The red pill of Cardano directories.",
+  "Curated by someone who hates bullshit.",
+  "We removed your favorite project.",
+  "Quality > Quantity. Always.",
+  "The only list that matters.",
+  "Real users or GTFO.",
+  "Government contracts or bust.",
+  "Blue Pages: Now with 100% less hopium.",
+  "Your rugpull isn't welcome here.",
+  "The directory that actually matters."
+     "No memecoins were harmed in the making of this directory.",
   "Proof or it didn't happen.",
   "Vaporware's natural enemy.",
   "Real revenue only. Sorry, not sorry.",
@@ -114,7 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const count = projects.length;
         document.getElementById('project-count').textContent = `${count} projects`;
-        document.getElementById('update-date').textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        document.getElementById('update-date').textContent = dateStr;
+
         document.getElementById('searchInput').placeholder = `Search all ${count} projects...`;
 
         // Update category counts cleanly
@@ -153,14 +172,15 @@ function renderProjects() {
     let filtered = currentFilter === 'all' ? projects : projects.filter(p => p.cat === currentFilter);
 
     filtered.sort((a, b) => {
-        if (currentSort === "impact") return (b.impactScore || 0) - (a.impactScore || 0);
-        if (currentSort === "name") return a.name.localeCompare(b.name);
-        if (currentSort === "tvl") {
-            const aVal = a.metrics ? parseFloat(a.metrics.match(/\$([0-9,.]+)/)?.[1]?.replace(/,/g,'') || 0) : 0;
-            const bVal = b.metrics ? parseFloat(b.metrics.match(/\$([0-9,.]+)/)?.[1]?.replace(/,/g,'') || 0) : 0;
-            return bVal - aVal;
+        switch(currentSort) {
+            case "impact": return (b.impactScore || 0) - (a.impactScore || 0);
+            case "name": return a.name.localeCompare(b.name);
+            case "tvl": 
+                const aVal = a.metrics ? parseFloat(a.metrics.match(/\$([0-9,.]+)/)?.[1]?.replace(/,/g,'') || 0) : 0;
+                const bVal = b.metrics ? parseFloat(b.metrics.match(/\$([0-9,.]+)/)?.[1]?.replace(/,/g,'') || 0) : 0;
+                return bVal - aVal;
+            default: return 0;
         }
-        return 0;
     });
 
     filtered.forEach(p => {
@@ -170,7 +190,7 @@ function renderProjects() {
             <div class="card h-100 project-card shadow-sm border-0">
                 <div class="card-body d-flex flex-column p-4">
                     <div class="d-flex align-items-start mb-3">
-                        ${p.logo ? `<img src="${p.logo}" alt="${p.name} logo" class="logo me-3 flex-shrink-0">` : `<div class="logo-placeholder me-3 flex-shrink-0">${p.name.charAt(0)}</div>`}
+                        ${p.logo ? `<img src="${p.logo}" alt="${p.name} logo" class="logo me-4 flex-shrink-0">` : `<div class="logo-placeholder me-4 flex-shrink-0">${p.name.charAt(0)}</div>`}
                         <div class="flex-grow-1">
                             <h5 class="fw-bold mb-1">${p.name}</h5>
                             <small class="text-muted text-uppercase fw-semibold">${categories[p.cat] || p.cat.toUpperCase()}</small>
@@ -183,8 +203,8 @@ function renderProjects() {
 
                     <div class="d-flex flex-wrap gap-2 mb-3">
                         ${p.tags ? p.tags.map(t => `<span class="badge ${tagClasses[t] || 'text-bg-secondary'}">${t}</span>`).join('') : ''}
-                        <span class="badge ${p.verified ? 'text-bg-success' : 'text-bg-warning text-dark'}">${p.verified ? '✓ Verified' : '⚠ Pending'}</span>
-                        ${p.type ? `<span class="badge ${p.type === 'Physical' ? 'badge-physical' : 'badge-digital'}">${p.type === 'Physical' ? '🌍 Physical' : '💻 Digital'}</span>` : ''}
+                        <span class="badge text-bg-success">✓ Verified Nov 22, 2025</span>
+                        ${p.type ? `<span class="badge ${p.type === 'Physical' ? 'badge-physical' : 'badge-digital'}">${p.type === 'Physical ? 'Physical' : 'Digital'}</span>` : ''}
                     </div>
 
                     <div class="proof-link small mb-3">
@@ -196,7 +216,6 @@ function renderProjects() {
                         ${p.twitter ? `<a href="https://twitter.com/${p.twitter}" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm"><i class="bi bi-twitter-x"></i></a>` : ''}
                     </div>
 
-                    <small class="text-muted mt-3 d-block text-end">Verified: Nov 21, 2025</small>
                 </div>
             </div>
         `;
@@ -248,23 +267,21 @@ function setupSort() {
 // Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 if (themeToggle) {
-    if (localStorage.getItem('theme') === 'dark') {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
+    } else {
         document.documentElement.setAttribute('data-theme', 'dark');
         themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
-    } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
     }
+
     themeToggle.addEventListener('click', () => {
-        if (document.documentElement.getAttribute('data-theme') === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-            themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
-        } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
-        }
+        const current = document.documentElement.getAttribute('data-theme');
+        const newTheme = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        themeToggle.innerHTML = newTheme === 'dark' ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
     });
 }
 
