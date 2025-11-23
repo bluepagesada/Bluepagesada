@@ -27,7 +27,7 @@ const categories = {
 };
 
 const splashes = [
-   "No memecoins were harmed in the making of this directory.",
+  "No memecoins were harmed in the making of this directory.",
   "Proof or it didn't happen.",
   "Vaporware's natural enemy.",
   "Real revenue only. Sorry, not sorry.",
@@ -44,77 +44,6 @@ const splashes = [
   "Blue Pages: Now with 100% less hopium.",
   "Your rugpull isn't welcome here.",
   "The directory that actually matters."
-     "No memecoins were harmed in the making of this directory.",
-  "Proof or it didn't happen.",
-  "Vaporware's natural enemy.",
-  "Real revenue only. Sorry, not sorry.",
-  "Where hype goes to die.",
-  "Cardano: Actually shipping since 2017.",
-  "Strictly business. No clown coins.",
-  "The red pill of Cardano directories.",
-  "Curated by someone who hates bullshit.",
-  "We removed your favorite project.",
-  "Quality > Quantity. Always.",
-  "The directory that says 'no' 99% of the time.",
-  "Real users or GTFO.",
-  "Government contracts or bust.",
-  "No airdrops. No promises. Just shipping.",
-  "Blue pilled? Stay away.",
-  "The only list that matters.",
-  "Still waiting for that 'killer app'? It's here.",
-  "Enterprise adoption loading... 100%.",
-  "We ghosted 500+ submissions this week.",
-  "Not financial advice. Just facts.",
-  "Cardano summer never came. Winter is fine.",
-  "Running on Voltaire and spite.",
-  "The purge continues.",
-  "Your rugpull isn't welcome here.",
-  "Real yield or real yieldn't.",
-  "We don't list dreams. Only reality.",
-  "The Cardano filter you didn't know you needed.",
-  "Now playing: Shipping Sounds>",
-  "Powered by Haskell and disappointment.",
-  "0xHype = false",
-  "Stake pools hate this list.",
-  "One list to rule them all.",
-  "The 'actually works' filter.",
-  "No roadmap. Just results.",
-  "Blue Pages: Now with 100% less hopium.",
-  "We fact-checked your whitepaper.",
-  "Cardano's immune system.",
-  "The directory that removes more than it adds.",
-  "Real utility or real quiet.",
-  "The only directory that actually matters.",
-  "We removed more projects than we added this month.",
-  "Cardano is quiet. That's the point.",
-  "Your favorite project didn't make the cut. Cope.",
-  "The list that made 90% of CT mad.",
-  "No paid listings. Ever.",
-  "The Cardano reality check.",
-  "Still more real than most L1s combined.",
-  "We don't do 'coming soon'.",
-  "The no-hopium zone.",
-  "Real builders only.",
-  "The only directory that actually matters.",
-  "We don't list dreams. Only results.",
-  "Cardano's immune system.",
-  "The purge continues.",
-  "Your rugpull isn't welcome here.",
-  "Real yield or real yieldn't.",
-  "We don't list dreams. Only reality.",
-  "The Cardano filter you didn't know you needed.",
-  "Now playing: Shipping Sounds>",
-  "Powered by Haskell and disappointment.",
-  "0xHype = false",
-  "Stake pools hate this list.",
-  "One list to rule them all.",
-  "The 'actually works' filter.",
-  "No roadmap. Just results.",
-  "Blue Pages: Now with 100% less hopium.",
-  "We fact-checked your whitepaper.",
-  "Cardano's immune system.",
-  "The directory that removes more than it adds.",
-  "Real utility or real quiet."
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -131,9 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const count = projects.length;
         document.getElementById('project-count').textContent = `${count} projects`;
-        document.getElementById('update-date').textContent = "November 22, 2025"; // forced for perfection
+        document.getElementById('update-date').textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
         document.getElementById('searchInput').placeholder = `Search all ${count} projects...`;
 
+        // Update category counts cleanly
         const catCounts = {};
         projects.forEach(p => catCounts[p.cat] = (catCounts[p.cat] || 0) + 1);
         document.querySelectorAll('#categoryTabs a[data-cat]').forEach(link => {
@@ -147,17 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
         setupTabs();
         setupSearch();
         setupSort();
-        // Force render if Projects tab is already active on page load
-  if (document.querySelector('#projects-tab').classList.contains('active')) {
-    renderProjects();
-  }
 
         document.getElementById('loadingSkeleton').style.display = 'none';
         document.getElementById('projectsGrid').style.display = 'grid';
     })
     .catch(err => {
         console.error('JSON Error:', err);
-        document.getElementById('loadingSkeleton').innerHTML = `<div class="col-12 text-center py-5 text-danger fw-bold fs-3">projects.json is fucked.<br><small>Fix it you magnificent bastard.</small></div>`;
+        document.getElementById('loadingSkeleton').innerHTML = `
+          <div class="col-12 text-center py-5 text-danger fw-bold fs-3">
+            projects.json is fucked.<br>
+            <small class="text-muted">Fix the syntax you magnificent bastard.</small>
+          </div>`;
     });
 });
 
@@ -169,15 +99,14 @@ function renderProjects() {
     let filtered = currentFilter === 'all' ? projects : projects.filter(p => p.cat === currentFilter);
 
     filtered.sort((a, b) => {
-        switch(currentSort) {
-            case "impact": return (b.impactScore || 0) - (a.impactScore || 0);
-            case "name": return a.name.localeCompare(b.name);
-            case "tvl": 
-                const aVal = a.metrics ? parseFloat(a.metrics.match(/\$([0-9,.]+)/)?.[1]?.replace(/,/g,'') || 0) : 0;
-                const bVal = b.metrics ? parseFloat(b.metrics.match(/\$([0-9,.]+)/)?.[1]?.replace(/,/g,'') || 0) : 0;
-                return bVal - aVal;
-            default: return 0;
+        if (currentSort === "impact") return (b.impactScore || 0) - (a.impactScore || 0);
+        if (currentSort === "name") return a.name.localeCompare(b.name);
+        if (currentSort === "tvl") {
+            const aVal = a.metrics ? parseFloat(a.metrics.match(/\$([0-9,.]+)/)?.[1]?.replace(/,/g,'') || 0) : 0;
+            const bVal = b.metrics ? parseFloat(b.metrics.match(/\$([0-9,.]+)/)?.[1]?.replace(/,/g,'') || 0) : 0;
+            return bVal - aVal;
         }
+        return 0;
     });
 
     filtered.forEach(p => {
@@ -201,7 +130,7 @@ function renderProjects() {
                     <div class="d-flex flex-wrap gap-2 mb-3">
                         ${p.tags ? p.tags.map(t => `<span class="badge ${tagClasses[t] || 'text-bg-secondary'}">${t}</span>`).join('') : ''}
                         <span class="badge ${p.verified ? 'text-bg-success' : 'text-bg-warning text-dark'}">${p.verified ? '✓ Verified' : '⚠ Pending'}</span>
-                        ${p.type ? `<span class="badge ${p.type === 'Physical' ? 'badge-physical' : 'badge-digital'}">${p.type === 'Physical' ? 'Physical' : 'Digital'}</span>` : ''}
+                        ${p.type ? `<span class="badge ${p.type === 'Physical' ? 'badge-physical' : 'badge-digital'}">${p.type === 'Physical' ? '🌍 Physical' : '💻 Digital'}</span>` : ''}
                     </div>
 
                     <div class="proof-link small mb-3">
@@ -213,7 +142,7 @@ function renderProjects() {
                         ${p.twitter ? `<a href="https://twitter.com/${p.twitter}" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm"><i class="bi bi-twitter-x"></i></a>` : ''}
                     </div>
 
-                    <small class="text-muted mt-3 d-block text-end">Verified: Nov 22, 2025</small>
+                    <small class="text-muted mt-3 d-block text-end">Verified: Nov 21, 2025</small>
                 </div>
             </div>
         `;
@@ -265,22 +194,23 @@ function setupSort() {
 // Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 if (themeToggle) {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
-    } else {
-        // default to dark
+    if (localStorage.getItem('theme') === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
         themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
     }
-
     themeToggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-        themeToggle.innerHTML = next === 'dark' ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
+        if (document.documentElement.getAttribute('data-theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+        }
     });
 }
 
