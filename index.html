@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blue Pages – The strict real-world Cardano project directory. Only projects with revenue, real users, orenterprise adoption. No hype. No memecoins.">
+    <meta name="description" content="Blue Pages – The strict real-world Cardano project directory. Only projects with revenue, real users, or enterprise adoption. No hype. No memecoins.">
     <meta property="og:title" content="Blue Pages – Cardano Real-World Utility Directory">
     <meta property="og:description" content="The only Cardano directory that actually matters.">
     <meta property="og:image" content="https://bluepagesada.github.io/Bluepagesada/og-preview.jpg">
@@ -49,7 +49,7 @@
                                 <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
                                     <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
                                     <feOffset dx="0" dy="15" result="offsetblur"/>
-                                    <feFlood flood-color="rgba(0,0,0,0,0.6)"/>
+                                    <feFlood flood-color="rgba(0,0,0,0.6)"/>
                                     <feComposite in2="offsetblur" operator="in"/>
                                     <feMerge>
                                         <feMergeNode/>
@@ -149,47 +149,54 @@
 
         <!-- PROJECTS TAB -->
         <div class="tab-pane fade" id="projectsTab" role="tabpanel">
-            <!-- Search + Sort -->
-            <div class="container search-box mb-4">
-                <div class="row g-3 align-items-center">
+            <div class="container py-4">
+
+                <!-- Search + Sort -->
+                <div class="row g-3 align-items-center mb-5">
                     <div class="col-lg-8">
-                        <input type="text" id="searchInput" class="form-control form-control-lg shadow" placeholder="Search projects..." autocomplete="off">
+                        <input type="text" id="searchInput" class="form-control form-control-lg rounded-pill shadow-sm" placeholder="Search all projects..." autocomplete="off">
                     </div>
                     <div class="col-lg-4">
-                        <select id="sortSelect" class="form-select form-select-lg">
+                        <select id="sortSelect" class="form-select form-select-lg rounded-pill shadow-sm">
                             <option value="impact">Sort: Impact Score</option>
                             <option value="name">Name (A-Z)</option>
                             <option value="tvl">Highest TVL/Revenue</option>
                         </select>
                     </div>
                 </div>
-            </div>
 
-            <!-- Category Tabs inside Projects -->
-            <div class="container mb-5">
-                <ul class="nav nav-pills nav-fill justify-content-center flex-wrap gap-2" id="categoryTabs">
-                    <li class="all" data-cat="all">All</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#depin" data-cat="depin">DePIN</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#rwa" data-cat="rwa">RWA</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#defi" data-cat="defi">DeFi</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#payments" data-cat="payments">Payments</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#oracles" data-cat="oracles">Oracles</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#identity" data-cat="identity">Identity</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#wallets" data-cat="wallets">Wallets</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#infra" data-cat="infra">Infra</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#nft" data-cat="nft">NFT</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gaming" data-cat="gaming">Gaming</a></li>
+                <!-- Category Pills -->
+                <ul class="nav nav-pills justify-content-center gap-3 mb-5 flex-wrap" id="categoryTabs">
+                    <li class="nav-item"><a class="nav-link active" data-cat="all">All</a></li>
+                    <li class="nav-item"><a class="nav-link" data-cat="depin">DePIN & Connectivity</a></li>
+                    <li class="nav-item"><a class="nav-link" data-cat="rwa">Real-World Assets & Tokenization</a></li>
+                    <li class="nav-item"><a class="nav-link" data-cat="defi">Finance & Real-Yield DeFi</a></li>
+                    <li class="nav-item"><a class="nav-link" data-cat="payments">Payments & Stablecoins</a></li>
+                    <li class="nav-item"><a class="nav-link" data-cat="identity">Digital Identity</a></li>
+                    <li class="nav-item"><a class="nav-link" data-cat="wallets">Wallets</a></li>
+                    <li class="nav-item"><a class="nav-link" data-cat="infra">Infrastructure & Dev Tools</a></li>
+                    <li class="nav-item"><a class="nav-link" data-cat="nft">NFT & Tokenization Platforms</a></li>
+                    <li class="nav-item"><a class="nav-link" data-cat="gaming">Gaming & Metaverse</a></li>
+                    <li class="nav-item"><a class="nav-link" data-cat="other">Other</a></li>
                 </ul>
-            </div>
 
-            <!-- Projects Grid -->
-            <div class="container my-5">
+                <!-- Loading Skeleton – 12 full placeholder cards -->
                 <div id="loadingSkeleton" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                    <!-- 12 skeleton cards -->
-                    <!--[repeat the 12 times for balance]-->
-                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-5"></span></div></div></div>
-                    <!-- ... -->
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
+                    <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><div class="d-flex align-items-start mb-3"><div class="bg-secondary rounded me-3" style="width:64px;height:64px;"></div><div><span class="placeholder col-8"></span><br><span class="placeholder col-6"></span></div></div><span class="placeholder col-12"></span><br><span class="placeholder col-11"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-7"></span></div></div></div>
                 </div>
+
+                <!-- Projects Grid -->
                 <div id="projectsGrid" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" style="display:none;"></div>
             </div>
         </div>
@@ -292,7 +299,7 @@
             </button>
             <span id="copyFeedback" class="ms-2 small text-success" style="opacity:0;transition:opacity .3s">Copied!</span>
             <p class="my-3">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?data=addr1qx9c4qr8lpp73lxz2z80jgdme9ua22096d8kdhf0249jv5qgpe74yz745c80rht0pm0zrahhudcccgawzvxvg4lc59ks7fw8yq&size=220x220&margin=20" alt="Blue Pages ADA donation QR code" class="img-fluid" style="max-width:160px;">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?data=addr1qx9c4qr8lpp73lxz2z80jgdme9ua22096d8kdhf0249jv5qgpe74yz745c80rht0pm0zrahhudcccgawzvxvg4lc59ks7fw8yq&size=160x160&margin=20" alt="Blue Pages ADA donation QR code" class="img-fluid" style="max-width:160px;">
             </p>
             <p class="small text-muted mb-1">
                 Visitors: <span id="visitor-count">...</span> • <strong>@BluePagesADA</strong>
