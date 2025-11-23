@@ -84,7 +84,7 @@ body {
   color: #001f3f;
 }
 
-/* CARDS – TALLER, MORE BREATHING ROOM, 4 PER ROW ON LARGE SCREENS */
+/* CARDS */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -100,26 +100,33 @@ body {
   box-shadow: 0 20px 40px rgba(0,0,0,.15);
 }
 
+/* LOGO FIXES - THIS IS THE BIG ONE */
 .card img.logo {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
-  border-radius: 12px;
-  background: #f0f0f0;
+  border-radius: 16px;
+  background: transparent !important;
+  border: 1px solid var(--border);
+  padding: 4px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
 .logo-placeholder {
-  width: 64px;
-  height: 64px;
-  border-radius: 12px;
-  background: var(--blue);
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
   color: white;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--border);
 }
+
+/* END LOGO FIXES */
 
 .metrics {
   font-size: 0.9rem;
@@ -171,9 +178,18 @@ body {
   border-color: #333;
 }
 
-[data-theme="dark"] .card img.logo,
-[data-theme="dark"] .logo-placeholder {
-  background: #333;
+/* CONTACT FORM TEXT VISIBILITY */
+#contact .form-label {
+  font-weight: 600 !important;
+  color: #fff !important;
+}
+#contact .form-control {
+  background-color: rgba(255,255,255,0.08);
+  border-color: #555;
+  color: #fff;
+}
+#contact .form-control::placeholder {
+  color: #aaa !important;
 }
 
 /* NEW BADGE STYLES */
