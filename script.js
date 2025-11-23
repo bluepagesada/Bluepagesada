@@ -147,6 +147,10 @@ document.addEventListener('DOMContentLoaded', () => {
         setupTabs();
         setupSearch();
         setupSort();
+        // Force render if Projects tab is already active on page load
+  if (document.querySelector('#projects-tab').classList.contains('active')) {
+    renderProjects();
+  }
 
         document.getElementById('loadingSkeleton').style.display = 'none';
         document.getElementById('projectsGrid').style.display = 'grid';
