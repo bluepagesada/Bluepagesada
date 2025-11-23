@@ -79,11 +79,6 @@ body {
   font-size: 1.1rem;
 }
 
-.hero .btn-light {
-  background: white;
-  color: #001f3f;
-}
-
 /* CARDS */
 .card {
   background: var(--card-bg);
@@ -100,33 +95,29 @@ body {
   box-shadow: 0 20px 40px rgba(0,0,0,.15);
 }
 
-/* LOGO FIXES - THIS IS THE BIG ONE */
+/* LOGO FIX - forced white bg + padding for perfect visibility */
 .card img.logo {
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
-  border-radius: 16px;
-  background: transparent !important;
-  border: 1px solid var(--border);
-  padding: 4px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  border-radius: 12px;
+  background: white !important;
+  padding: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .logo-placeholder {
-  width: 80px;
-  height: 80px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: var(--blue);
   color: white;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border);
 }
-
-/* END LOGO FIXES */
 
 .metrics {
   font-size: 0.9rem;
@@ -164,7 +155,7 @@ body {
   font-size: 0.8rem;
 }
 
-/* Dark mode contrast fixes */
+/* Dark mode fixes */
 [data-theme="dark"] .text-muted {
   color: #bbb !important;
 }
@@ -178,18 +169,14 @@ body {
   border-color: #333;
 }
 
-/* CONTACT FORM TEXT VISIBILITY */
-#contact .form-label {
-  font-weight: 600 !important;
-  color: #fff !important;
+/* FORM LABELS - bold + high contrast */
+.form-label {
+  font-weight: 700 !important;
+  color: #fff !important; /* pure white in dark */
 }
-#contact .form-control {
-  background-color: rgba(255,255,255,0.08);
-  border-color: #555;
-  color: #fff;
-}
-#contact .form-control::placeholder {
-  color: #aaa !important;
+
+[data-theme="light"] .form-label {
+  color: #212529 !important;
 }
 
 /* NEW BADGE STYLES */
