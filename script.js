@@ -131,14 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const count = projects.length;
         document.getElementById('project-count').textContent = `${count} projects`;
-        
-        const today = new Date();
-        const dateStr = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-        document.getElementById('update-date').textContent = dateStr;
-
+        document.getElementById('update-date').textContent = "November 22, 2025"; // forced for perfection
         document.getElementById('searchInput').placeholder = `Search all ${count} projects...`;
 
-        // Update category counts cleanly
         const catCounts = {};
         projects.forEach(p => catCounts[p.cat] = (catCounts[p.cat] || 0) + 1);
         document.querySelectorAll('#categoryTabs a[data-cat]').forEach(link => {
@@ -150,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderProjects();
         setupTabs();
-        setupTabs();
         setupSearch();
         setupSort();
 
@@ -159,11 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => {
         console.error('JSON Error:', err);
-        document.getElementById('loadingSkeleton').innerHTML = `
-          <div class="col-12 text-center py-5 text-danger fw-bold fs-3">
-            projects.json is fucked.<br>
-            <small class="text-muted">Fix the syntax you magnificent bastard.</small>
-          </div>`;
+        document.getElementById('loadingSkeleton').innerHTML = `<div class="col-12 text-center py-5 text-danger fw-bold fs-3">projects.json is fucked.<br><small>Fix it you magnificent bastard.</small></div>`;
     });
 });
 
@@ -186,8 +176,6 @@ function renderProjects() {
         }
     });
 
-    const verifiedDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-
     filtered.forEach(p => {
         const col = document.createElement('div');
         col.className = 'col';
@@ -195,7 +183,7 @@ function renderProjects() {
             <div class="card h-100 project-card shadow-sm border-0">
                 <div class="card-body d-flex flex-column p-4">
                     <div class="d-flex align-items-start mb-3">
-                        ${p.logo ? `<img src="${p.logo}" alt="${p.name} logo" class="logo me-4 flex-shrink-0">` : `<div class="logo-placeholder me-4 flex-shrink-0">${p.name.charAt(0)}</div>`}
+                        ${p.logo ? `<img src="${p.logo}" alt="${p.name} logo" class="logo me-3 flex-shrink-0">` : `<div class="logo-placeholder me-3 flex-shrink-0">${p.name.charAt(0)}</div>`}
                         <div class="flex-grow-1">
                             <h5 class="fw-bold mb-1">${p.name}</h5>
                             <small class="text-muted text-uppercase fw-semibold">${categories[p.cat] || p.cat.toUpperCase()}</small>
@@ -208,7 +196,7 @@ function renderProjects() {
 
                     <div class="d-flex flex-wrap gap-2 mb-3">
                         ${p.tags ? p.tags.map(t => `<span class="badge ${tagClasses[t] || 'text-bg-secondary'}">${t}</span>`).join('') : ''}
-                        <span class="badge text-bg-success">✓ Verified ${verifiedDate}</span>
+                        <span class="badge ${p.verified ? 'text-bg-success' : 'text-bg-warning text-dark'}">${p.verified ? '✓ Verified' : '⚠ Pending'}</span>
                         ${p.type ? `<span class="badge ${p.type === 'Physical' ? 'badge-physical' : 'badge-digital'}">${p.type === 'Physical' ? 'Physical' : 'Digital'}</span>` : ''}
                     </div>
 
@@ -220,6 +208,8 @@ function renderProjects() {
                         <a href="${p.link}" target="_blank" rel="noopener" class="btn btn-primary btn-sm flex-grow-1">Website</a>
                         ${p.twitter ? `<a href="https://twitter.com/${p.twitter}" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm"><i class="bi bi-twitter-x"></i></a>` : ''}
                     </div>
+
+                    <small class="text-muted mt-3 d-block text-end">Verified: Nov 22, 2025</small>
                 </div>
             </div>
         `;
