@@ -79,7 +79,12 @@ body {
   font-size: 1.1rem;
 }
 
-/* CARDS */
+.hero .btn-light {
+  background: white;
+  color: #001f3f;
+}
+
+/* CARDS – TALLER, MORE BREATHING ROOM, 4 PER ROW ON LARGE SCREENS */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -95,15 +100,12 @@ body {
   box-shadow: 0 20px 40px rgba(0,0,0,.15);
 }
 
-/* LOGO FIX - forced white bg + padding for perfect visibility */
 .card img.logo {
   width: 64px;
   height: 64px;
   object-fit: contain;
   border-radius: 12px;
-  background: white !important;
-  padding: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  background: #f0f0f0;
 }
 
 .logo-placeholder {
@@ -155,7 +157,7 @@ body {
   font-size: 0.8rem;
 }
 
-/* Dark mode fixes */
+/* Dark mode contrast fixes */
 [data-theme="dark"] .text-muted {
   color: #bbb !important;
 }
@@ -169,14 +171,9 @@ body {
   border-color: #333;
 }
 
-/* FORM LABELS - bold + high contrast */
-.form-label {
-  font-weight: 700 !important;
-  color: #fff !important; /* pure white in dark */
-}
-
-[data-theme="light"] .form-label {
-  color: #212529 !important;
+[data-theme="dark"] .card img.logo,
+[data-theme="dark"] .logo-placeholder {
+  background: #333;
 }
 
 /* NEW BADGE STYLES */
@@ -214,9 +211,4 @@ body {
     width: 160px;
     height: 160px;
   }
-  .nav-pills .nav-link.active, .nav-pills .nav-link.active:hover {
-  background-color: var(--blue) !important;
-  color: white !important;
-  border-radius: 50px;
-}
 }
