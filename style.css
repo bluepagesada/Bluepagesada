@@ -79,12 +79,7 @@ body {
   font-size: 1.1rem;
 }
 
-.hero .btn-light {
-  background: white;
-  color: #001f3f;
-}
-
-/* CARDS – TALLER, MORE BREATHING ROOM, 4 PER ROW ON LARGE SCREENS */
+/* CARDS */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -100,12 +95,16 @@ body {
   box-shadow: 0 20px 40px rgba(0,0,0,.15);
 }
 
+/* LOGO PERFECT FIX – ALWAYS WHITE BG, CRISP IN BOTH THEMES */
 .card img.logo {
   width: 64px;
   height: 64px;
   object-fit: contain;
   border-radius: 12px;
-  background: #f0f0f0;
+  background: white !important;
+  padding: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  border: 1px solid #ddd;
 }
 
 .logo-placeholder {
@@ -119,6 +118,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
 .metrics {
@@ -148,6 +148,26 @@ body {
   border-radius: 0;
 }
 
+/* NAV PILLS (CATEGORY TABS) – PERFECT LOOK */
+.nav-pills .nav-link {
+  border-radius: 50px;
+  font-weight: 600;
+  color: var(--text);
+  padding: 0.5rem 1.2rem;
+  background: rgba(255,255,255,0.08);
+  transition: all 0.2s;
+}
+
+.nav-pills .nav-link:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.nav-pills .nav-link.active {
+  background: var(--blue) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(0,45,114,0.4);
+}
+
 #loadingSkeleton {
   min-height: 600px;
 }
@@ -157,7 +177,7 @@ body {
   font-size: 0.8rem;
 }
 
-/* Dark mode contrast fixes */
+/* Dark mode fixes */
 [data-theme="dark"] .text-muted {
   color: #bbb !important;
 }
@@ -171,27 +191,55 @@ body {
   border-color: #333;
 }
 
-[data-theme="dark"] .card img.logo,
-[data-theme="dark"] .logo-placeholder {
-  background: #333;
+/* FORM LABELS – BOLD + PURE WHITE IN DARK */
+.form-label {
+  font-weight: 700 !important;
+  color: #ffffff !important;
 }
 
-/* NEW BADGE STYLES */
+[data-theme="light"] .form-label {
+  color: #212529 !important;
+}
+
+/* SEARCH/SORT INPUTS – BETTER DARK MODE CONTRAST */
+.form-control, .form-select {
+  background-color: #2c2c2c !important;
+  border-color: #444 !important;
+  color: white !important;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: #333 !important;
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 0 0.25rem rgba(0, 45, 114, 0.25);
+}
+
+[data-theme="light"] .form-control,
+[data-theme="light"] .form-select {
+  background-color: white !important;
+  color: #212529 !important;
+}
+
+/* BADGE STYLES */
 .badge-purple {
   background-color: #6f42c1 !important;
 }
+
 .badge-physical {
   background-color: #fd7e14 !important;
   color: white !important;
 }
+
 .badge-digital {
   background-color: #0dcaf0 !important;
   color: black !important;
 }
+
 .project-card .badge {
   font-size: 0.75rem !important;
   padding: 0.35em 0.65em;
 }
+
 .project-card .badge:hover {
   transform: scale(1.1);
 }
@@ -203,9 +251,6 @@ body {
   }
   .hero .lead {
     font-size: 1.4rem;
-  }
-  .hero .btn {
-    font-size: 1rem;
   }
   .hero-logo {
     width: 160px;
