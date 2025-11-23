@@ -214,4 +214,9 @@ body {
     width: 160px;
     height: 160px;
   }
+  .nav-pills .nav-link.active, .nav-pills .nav-link.active:hover {
+  background-color: var(--blue) !important;
+  color: white !important;
+  border-radius: 50px;
+}
 }
