@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blue Pages – The strict real-world Cardano project directory. Only projects with revenue, real users, or government/enterprise adoption. No hype. No memecoins.">
+    <meta property="og:title" content="Blue Pages – Cardano Real-World Utility Directory">
+    <meta property="og:description" content="The only Cardano directory that actually matters. Proof required.">
+    <meta property="og:image" content="https://bluepagesada.github.io/Bluepagesada/og-preview.jpg">
+    <meta property="og:url" content="https://bluepagesada.github.io/Bluepagesada/">
+    <meta name="theme-color" content="#002D72">
+    <title>Blue Pages – Cardano Real-World Utility Directory</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23002D72'/></svg>">
+</head>
+<body>
+
+    <!-- HERO WITH RANDOM QUIRKY SPLASH TEXT -->
+    <section class="hero text-center text-white d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-xxl-8">
+
+                    <!-- Logo -->
+                    <div class="text-center mb-4">
+                        <svg width="220" height="220" viewBox="0 0 220 220" class="hero-logo" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="bluegrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#0033AD"/>
+                                    <stop offset="100%" stop-color="#00D4FF"/>
+                                </linearGradient>
+                            </defs>
+                            <g filter="url(#shadow)">
+                                <path d="M110 20 L200 80 L200 140 L110 200 L20 140 L20 80 Z" fill="url(#bluegrad)" stroke="#002D5A" stroke-width="6"/>
+                                <path d="M110 60 L170 100 L170 120 L110 160 L50 120 L50 100 Z" fill="white"/>
+                                <path d="M110 80 L145 110 L110 140 L75 110 Z" fill="#002D5A"/>
+                            </g>
+                            <defs>
+                                <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+                                    <feOffset dx="0" dy="15" result="offsetblur"/>
+                                    <feFlood flood-color="rgba(0,0,0,0.5)"/>
+                                    <feComposite in2="offsetblur" operator="in"/>
+                                    <feMerge>
+                                        <feMergeNode/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <h1 class="display-1 fw-bold mb-3">
+                        Blue<span class="fw-light">Pages</span>
+                    </h1>
+
+                    <!-- RANDOM QUIRKY SPLASH (Minecraft style) -->
+                    <p id="splash-text" class="fs-4 mb-5 opacity-90 fw-medium"></p>
+
+                    <p class="lead fw-medium mb-4 opacity-95">
+                        The strict real-world Cardano directory.<br class="d-none d-md-block">
+                        Only projects with revenue, real users, or enterprise contracts. Proof required.
+                    </p>
+
+                    <p class="fs-5 mb-5 opacity-90">
+                        As of <span id="update-date">November 21, 2025</span> – <strong id="project-count">72 projects</strong> – verified daily
+                    </p>
+
+                    <div class="d-flex justify-content-center gap-4 flex-wrap">
+                        <a href="#projects" class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-semibold">Explore Projects →</a>
+                        <button class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#submitModal">Submit Project</button>
+                        <button id="themeToggle" class="btn btn-outline-light btn-lg rounded-pill"><i class="bi bi-moon-stars-fill"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verification Alert -->
+    <div class="container my-5">
+        <div class="alert alert-info text-center fw-bold fs-5">
+            Every project is manually verified using DefiLlama, on-chain data, or official reports. No exceptions.<br>
+            <a href="#verification" class="text-decoration-underline">See full verification standard →</a>
+        </div>
+    </div>
+
+    <!-- Search + Sort -->
+    <div class="container search-box mb-4">
+        <div class="row g-3 align-items-center">
+            <div class="col-lg-8">
+                <input type="text" id="searchInput" class="form-control form-control-lg shadow" placeholder="Search projects..." autocomplete="off">
+            </div>
+            <div class="col-lg-4">
+                <select id="sortSelect" class="form-select form-select-lg">
+                    <option value="impact">Sort: Impact Score</option>
+                    <option value="name">Name (A-Z)</option>
+                    <option value="tvl">Highest TVL/Revenue</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="container mb-5">
+        <ul class="nav nav-pills nav-fill justify-content-center flex-wrap gap-2" id="categoryTabs">
+            <li class="nav-item"><a class="nav-link active" href="#all" data-cat="all">All</a></li>
+            <li class="nav-item"><a class="nav-link" href="#depin" data-cat="depin">DePIN</a></li>
+            <li class="nav-item"><a class="nav-link" href="#rwa" data-cat="rwa">RWA</a></li>
+            <li class="nav-item"><a class="nav-link" href="#defi" data-cat="defi">DeFi</a></li>
+            <li class="nav-item"><a class="nav-link" href="#payments" data-cat="payments">Payments</a></li>
+            <li class="nav-item"><a class="nav-link" href="#oracles" data-cat="oracles">Oracles</a></li>
+            <li class="nav-item"><a class="nav-link" href="#identity" data-cat="identity">Identity</a></li>
+            <li class="nav-item"><a class="nav-link" href="#wallets" data-cat="wallets">Wallets</a></li>
+            <li class="nav-item"><a class="nav-link" href="#infra" data-cat="infra">Infra</a></li>
+            <li class="nav-item"><a class="nav-link" href="#nft" data-cat="nft">NFT</a></li>
+            <li class="nav-item"><a class="nav-link" href="#gaming" data-cat="gaming">Gaming</a></li>
+        </ul>
+    </div>
+
+    <!-- Projects Grid + Skeleton -->
+    <div class="container my-5" id="projects">
+        <div id="loadingSkeleton" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span><br><span class="placeholder col-10"></span><br><span class="placeholder col-5"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+            <div class="col"><div class="card h-100"><div class="card-body placeholder-glow"><span class="placeholder col-7"></span></div></div></div>
+        </div>
+        <div id="projectsGrid" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" style="display:none;"></div>
+    </div>
+
+    <!-- Verification Standard -->
+    <div class="container my-5" id="verification">
+        <div class="card border-primary shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title mb-3">Blue Pages Verification Standard (Nov 21, 2025)</h4>
+                <p>Every project must have <strong>at least one</strong> of the following, publicly verifiable:</p>
+                <ul class="list-unstyled">
+                    <li>• Real revenue (protocol fees, paid APIs, sales) – source: DefiLlama or official financials</li>
+                    <li>• Real users/TVL on mainnet – DefiLlama TVL > $1M or verified user metrics</li>
+                    <li>• Government or enterprise adoption – signed contract, live deployment, or official announcement</li>
+                </ul>
+                <p class="mb-0">All data manually checked by @BluePagesADA. Projects are removed the day they no longer qualify. No exceptions.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Modal -->
+    <div class="modal fade" id="submitModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Submit Project for Blue Pages</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form action="https://formsubmit.co/bluepagesada@gmail.com" method="POST">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_subject" value="Blue Pages Submission">
+              <input type="hidden" name="_next" value="https://bluepagesada.github.io/Bluepagesada/">
+              <div class="mb-3"><label>Project Name *</label><input type="text" class="form-control" name="Project Name" required></div>
+              <div class="mb-3"><label>Website *</label><input type="url" class="form-control" name="Website" required></div>
+              <div class="mb-3"><label>X Handle</label><input type="text" class="form-control" name="X Handle"></div>
+              <div class="mb-3"><label>Industry *</label><input type="text" class="form-control" name="Industry" required></div>
+              <div class="mb-3"><label>Short Description *</label><textarea class="form-control" name="Description" rows="3" required></textarea></div>
+              <div class="mb-3"><label>Proof of Real-World Impact *</label><textarea class="form-control" name="Proof" rows="5" required></textarea></div>
+              <div class="mb-3"><label>Your Email *</label><input type="email" class="form-control" name="email" required></div>
+              <button type="submit" class="btn btn-primary w-100">Submit for Review</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-5 bg-dark text-white">
+        <div class="container">
+            <p class="fw-bold fs-4 mb-3">Donate to Support Blue Pages</p>
+            <button id="copyBtn" class="btn btn-outline-light btn-lg mb-3">
+                <i class="bi bi-copy"></i> Copy ADA Address
+            </button>
+            <span id="copyFeedback" class="ms-3 fw-bold text-success" style="opacity:0;transition:opacity .3s">Copied!</span>
+            <p class="my-4">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?data=addr1qx9c4qr8lpp73lxz2z80jgdme9ua22096d8kdhf0249jv5qgpe74yz745c80rht0pm0zrahhudcccgawzvxvg4lc59ks7fw8yq&size=220x220&margin=20" alt="Blue Pages ADA donation QR code" class="img-fluid" style="max-width:220px;">
+            </p>
+            <p>
+                Visitors: <span id="visitor-count">...</span> • <strong>@BluePagesADA</strong><br>
+                <small>The only Cardano directory that actually matters.</small>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="script.js"></script>
+</body>
+</html>
