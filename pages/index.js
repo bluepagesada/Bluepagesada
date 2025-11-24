@@ -19,25 +19,24 @@ export default function Home() {
       </Head>
 
       <main className="d-flex flex-column min-vh-100">
-        {/* TOP RIGHT THEME TOGGLE */}
+        {/* Theme Toggle */}
         <div className="position-fixed top-0 end-0 p-3 z-3">
           <button id="themeToggle" className="btn btn-outline-light rounded-circle p-3 shadow-lg">
             <i className="bi bi-moon-stars-fill"></i>
           </button>
         </div>
 
-        {/* HERO */}
+        {/* Hero - Exact Old */}
         <section className="hero text-center text-white d-flex align-items-center min-vh-100">
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-lg-10 col-xxl-8">
-                {/* Logo */}
                 <div className="text-center mb-4">
                   <svg width="220" height="220" viewBox="0 0 220 220" className="hero-logo" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                       <linearGradient id="bluegrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#0033AD" />
-                        <stop offset="100%" stop-color="#00D4FF" />
+                        <stop offset="0%" stopColor="#0033AD" />
+                        <stop offset="100%" stopColor="#00D4FF" />
                       </linearGradient>
                     </defs>
                     <g filter="url(#shadow)">
@@ -59,22 +58,17 @@ export default function Home() {
                     </defs>
                   </svg>
                 </div>
-
                 <h1 className="display-1 fw-bold mb-3">
                   Blue<span className="fw-light">Pages</span>
                 </h1>
-
                 <p id="splash-text" className="fs-4 mb-5 opacity-90 fw-medium"></p>
-
                 <p className="lead fw-medium mb-4 opacity-95">
                   The strict real-world Cardano directory.<br className="d-none d-md-block" />
                   Only projects with revenue, real users, or enterprise contracts. Proof required.
                 </p>
-
                 <p className="fs-5 mb-5 opacity-90">
                   As of <span id="update-date">November 23, 2025</span> – <strong id="project-count">71 projects</strong> – verified daily
                 </p>
-
                 <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
                   <a href="#projects" className="btn btn-primary btn-lg px-5 py-3 fw-semibold">View Projects</a>
                   <button className="btn btn-outline-light btn-lg px-5 py-3 fw-semibold" data-bs-toggle="modal" data-bs-target="#submitModal">Submit Project</button>
@@ -84,17 +78,15 @@ export default function Home() {
           </div>
         </section>
 
-        {/* METRICS DASHBOARD – Static Fallback for Nov 23, 2025 */}
+        {/* Metrics - Old Static Fallback */}
         <section className="py-5 bg-light bg-opacity-10">
           <div className="container">
             <h2 className="text-center mb-5 fw-bold fs-2">Cardano at a Glance <small className="text-muted">(November 23, 2025)</small></h2>
-            <div id="metrics-grid" className="row g-4 justify-content-center">
-              {/* JS will populate: ADA $0.41 (+1.53%), TVL $185M, etc. */}
-            </div>
+            <div id="metrics-grid" className="row g-4 justify-content-center"></div>
           </div>
         </section>
 
-        {/* MAIN CONTENT – Tabbed Sections */}
+        {/* Tabs - Old Layout */}
         <div className="container my-5 flex-grow-1">
           <ul className="nav nav-tabs nav-fill border-0 shadow-sm rounded mb-4" id="mainTabs" role="tablist">
             <li className="nav-item" role="presentation">
@@ -107,9 +99,8 @@ export default function Home() {
               <button className="nav-link fs-4 fw-semibold" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab">About</button>
             </li>
           </ul>
-
           <div className="tab-content border-0 shadow-sm rounded p-4" id="mainTabContent">
-            {/* HOME TAB */}
+            {/* Home Tab - Old Content */}
             <div className="tab-pane fade show active" id="home" role="tabpanel">
               <div className="row g-4">
                 <div className="col-lg-8">
@@ -153,7 +144,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* PROJECTS TAB */}
+            {/* Projects Tab - Old Grid + Skeleton */}
             <div className="tab-pane fade" id="projects" role="tabpanel">
               <div className="row mb-4 align-items-center">
                 <div className="col-md-5">
@@ -172,16 +163,22 @@ export default function Home() {
                   <div id="projectsFound" className="text-muted small">71 projects found</div>
                 </div>
               </div>
-
               <ul className="nav nav-pills mb-4 justify-content-center flex-wrap gap-2" id="categoryTabs">
                 <li className="nav-item"><a className="nav-link active" href="#" data-cat="all">All (71)</a></li>
                 <li className="nav-item"><a className="nav-link" data-cat="depin">DePIN & Connectivity (15)</a></li>
                 <li className="nav-item"><a className="nav-link" data-cat="rwa">Real-World Assets (12)</a></li>
-                {/* Add more from categories obj in JS */}
+                <li className="nav-item"><a className="nav-link" data-cat="defi">DeFi (10)</a></li>
+                <li className="nav-item"><a className="nav-link" data-cat="payments">Payments (4)</a></li>
+                <li className="nav-item"><a className="nav-link" data-cat="oracles">Oracles (3)</a></li>
+                <li className="nav-item"><a className="nav-link" data-cat="identity">Digital Identity (5)</a></li>
+                <li className="nav-item"><a className="nav-link" data-cat="wallets">Wallets (2)</a></li>
+                <li className="nav-item"><a className="nav-link" data-cat="infra">Infrastructure (6)</a></li>
+                <li className="nav-item"><a className="nav-link" data-cat="nft">NFT Platforms (3)</a></li>
+                <li className="nav-item"><a className="nav-link" data-cat="gaming">Gaming (2)</a></li>
+                <li className="nav-item"><a className="nav-link" data-cat="other">Other (0)</a></li>
               </ul>
-
               <div id="projectsGrid" className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                {/* Loading skeleton – 8 cards */}
+                {/* 8 Skeleton Cards - Old Style */}
                 {Array.from({ length: 8 }, (_, i) => (
                   <div key={i} className="col">
                     <div className="card h-100">
@@ -189,13 +186,17 @@ export default function Home() {
                         <div className="d-flex align-items-start mb-3">
                           <div className="bg-secondary rounded me-3" style={{ width: '64px', height: '64px' }}></div>
                           <div>
-                            <span className="placeholder col-8"></span><br />
+                            <span className="placeholder col-8"></span>
+                            <br />
                             <span className="placeholder col-6"></span>
                           </div>
                         </div>
-                        <span className="placeholder col-12"></span><br />
-                        <span className="placeholder col-11"></span><br />
-                        <span className="placeholder col-10"></span><br />
+                        <span className="placeholder col-12"></span>
+                        <br />
+                        <span className="placeholder col-11"></span>
+                        <br />
+                        <span className="placeholder col-10"></span>
+                        <br />
                         <span className="placeholder col-7"></span>
                       </div>
                     </div>
@@ -204,7 +205,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* ABOUT TAB */}
+            {/* About Tab - Old */}
             <div className="tab-pane fade" id="about" role="tabpanel">
               <div className="row g-4">
                 <div className="col-lg-8">
@@ -236,7 +237,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* FOOTER */}
+        {/* Footer - Old QR + Copy */}
         <footer className="bg-dark text-white py-5 mt-auto text-center">
           <div className="container">
             <p className="fw-bold fs-4 mb-3">Donate to Support Blue Pages</p>
@@ -255,13 +256,13 @@ export default function Home() {
           </div>
         </footer>
 
-        {/* SUBMIT MODAL */}
+        {/* Submit Modal - Old Form */}
         <div className="modal fade" id="submitModal" tabIndex="-1">
           <div className="modal-dialog modal-lg">
             <div className="modal-content">
               <div className="modal-header bg-primary text-white">
                 <h5 className="modal-title">Submit Project for Blue Pages</h5>
-                <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" />
               </div>
               <div className="modal-body">
                 <form action="https://formsubmit.co/bluepagesada@gmail.com" method="POST">
@@ -286,11 +287,11 @@ export default function Home() {
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Short Description *</label>
-                    <textarea className="form-control" name="Description" rows="3" required></textarea>
+                    <textarea className="form-control" name="Description" rows="3" required />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Proof of Real-World Impact *</label>
-                    <textarea className="form-control" name="Proof" rows="5" required></textarea>
+                    <textarea className="form-control" name="Proof" rows="5" required />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Your Email *</label>
