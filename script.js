@@ -318,33 +318,41 @@ function loadCardanoMetrics() {
     const grid = document.getElementById('metrics-grid');
     if (!grid) return;
 
-    // Show loading state
+    // Show loading
     grid.innerHTML = '<div class="col-12 text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
 
-    // CORS proxy for CoinGecko
-    const coingeckoProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true');
+    // CoinGecko via corsproxy.io
+    const coingeckoUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true';
+    const coingeckoProxy = 'https://corsproxy.io/?' + encodeURIComponent(coingeckoUrl);
     fetch(coingeckoProxy)
-        .then(r => r.json())
+        .then(r => {
+            if (!r.ok) throw new Error('CoinGecko fetch failed: ' + r.status);
+            return r.json();
+        })
         .then(data => {
-            const adaData = JSON.parse(data.contents);
-            const ada = adaData.cardano;
+            console.log('CoinGecko data loaded:', data); // Debug log
+            const ada = data.cardano;
             const changeClass = ada.usd_24h_change > 0 ? 'text-success' : 'text-danger';
 
-            // CORS proxy for DefiLlama
-            const defillamaProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.llama.fi/tvl/cardano');
+            // DefiLlama via corsproxy.io
+            const defillamaUrl = 'https://api.llama.fi/tvl/cardano';
+            const defillamaProxy = 'https://corsproxy.io/?' + encodeURIComponent(defillamaUrl);
             fetch(defillamaProxy)
-                .then(r => r.json())
-                .then(data => {
-                    const tvlData = JSON.parse(data.contents);
+                .then(r => {
+                    if (!r.ok) throw new Error('DefiLlama fetch failed: ' + r.status);
+                    return r.json();
+                })
+                .then(tvlData => {
+                    console.log('DefiLlama data loaded:', tvlData); // Debug log
                     const tvl = tvlData || 0;
 
-                    // Staking % (static for now, ~71% in 2025)
+                    // Staking % (static 2025 avg ~71.2%)
                     const stakingPercent = 71.2;
 
-                    // Tx 24h (static placeholder, use Blockfrost for live if needed)
+                    // Tx 24h (static placeholder ~1.2M tx/day in 2025)
                     const tx24h = '1.2M';
 
-                    // Build cards HTML
+                    // Build cards
                     const metricsHtml = `
                         <div class="col-md-4 col-sm-6">
                             <div class="card border-0 shadow-sm h-100 text-center p-3">
@@ -391,11 +399,19 @@ function loadCardanoMetrics() {
                     `;
                     grid.innerHTML = metricsHtml;
                 })
-                .catch(() => grid.innerHTML = '<div class="col-12 text-center text-muted">Metrics temporarily unavailable</div>');
+                .catch(err => {
+                    console.error('DefiLlama error:', err);
+                    grid.innerHTML = '<div class="col-12 text-center text-muted">Metrics temporarily unavailable (TVL fetch failed)</div>';
+                });
         })
-        .catch(() => grid.innerHTML = '<div class="col-12 text-center text-muted">Metrics temporarily unavailable</div>');
+        .catch(err => {
+            console.error('CoinGecko error:', err);
+            grid.innerHTML = '<div class="col-12 text-center text-muted">Metrics temporarily unavailable (Price fetch failed)</div>';
+        });
 }
 
 // Load on page load, update every 30s
-loadCardanoMetrics();
-setInterval(loadCardanoMetrics, 30000);
+if (document.getElementById('metrics-grid')) {
+    loadCardanoMetrics();
+    setInterval(loadCardanoMetrics, 30000);
+}
