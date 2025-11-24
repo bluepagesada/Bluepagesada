@@ -1,3 +1,7 @@
+.badge-revenue { background: #28a745 !important; color: white; }
+.badge-enterprise { background: #007bff !important; color: white; }
+.badge-gov { background: #6f42c1 !important; color: white; }
+
 :root {
   --blue: #002D72;
   --cyan: #00D4FF;
