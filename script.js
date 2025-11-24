@@ -162,8 +162,8 @@ function renderProjects() {
     });
 
     filtered.forEach(p => {
-        const col = document.createElement('div');
-        col.className = 'col';
+       const col = document.createElement('div');
+col.className = 'col-12 col-md-6 col-lg-3 col-xl-3'; // 1 on mobile, 2 on tablet, 4 on desktop
 
         const logoHtml = p.logo 
             ? `<img src="${p.logo}" alt="${p.name} logo" class="logo me-3 flex-shrink-0" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">`
