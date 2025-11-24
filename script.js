@@ -26,57 +26,23 @@ const categories = {
     other: "Other Real-World Use Cases"
 };
 
-const splashes = [
-    "No memecoins were harmed in the making of this directory.",
-    "Proof or it didn't happen.",
-    "Vaporware's natural enemy.",
-    "Real revenue only. Sorry, not sorry.",
-    "Where hype goes to die.",
-    "Cardano: Actually shipping since 2017.",
-    "Strictly business. No clown coins.",
-    "The red pill of Cardano directories.",
-    "Curated by someone who hates bullshit.",
-    "We removed your favorite project.",
-    "Quality > Quantity. Always.",
-    "The directory that says 'no' 99% of the time.",
-    "Real users or GTFO.",
-    "Government contracts or bust.",
-    "No airdrops. No promises. Just shipping.",
-    "Blue pilled? Stay away.",
-    "Still waiting for that 'killer app'? It's here.",
-    "Enterprise adoption loading… 100%.",
-    "We ghosted 500+ submissions this week.",
-    "Not financial advice. Just facts.",
-    "Cardano summer never came. Winter is fine.",
-    "Running on Voltaire and spite.",
-    "The purge continues.",
-    "Your rugpull isn't welcome here.",
-    "Real yield or real yieldn't.",
-    "We don't list dreams. Only reality.",
-    "The Cardano filter you didn't know you needed.",
-    "Now playing: Shipping Sounds>",
-    "Powered by Haskell and disappointment.",
-    "0xHype = false",
-    "Stake pools hate this list.",
-    "One list to rule them all.",
-    "The 'actually works' filter.",
-    "No roadmap. Just results.",
-    "Blue Pages: 100% less hopium.",
-    "We fact-checked your whitepaper.",
-    "Cardano's immune system.",
-    "The directory that removes more than it adds.",
-    "Real utility or real quiet.",
-    "Your favorite project didn't make the cut. Cope.",
-    "The list that made 90% of CT mad.",
-    "No paid listings. Ever.",
-    "The Cardano reality check.",
-    "Still more real than most L1s combined.",
-    "We don't do 'coming soon'.",
-    "The no-hopium zone.",
-    "Real builders only.",
-    "The only directory that actually matters."
-];
-
+/ Load splashes from JSON
+fetch('/public/data/splashes.json')
+    .then(r => r.json())
+    .then(splashesData => {
+        const splashEl = document.getElementById('splash-text');
+        if (splashEl) {
+            splashEl.textContent = splashesData[Math.floor(Math.random() * splashesData.length)];
+        }
+    })
+    .catch(() => {
+        // Fallback if JSON fails
+        const fallbackSplashes = ["No memecoins were harmed in the making of this directory.", "Proof or it didn't happen."];
+        const splashEl = document.getElementById('splash-text');
+        if (splashEl) {
+            splashEl.textContent = fallbackSplashes[Math.floor(Math.random() * fallbackSplashes.length)];
+        }
+    });
 document.addEventListener('DOMContentLoaded', () => {
     // Random savage splash
     const splashEl = document.getElementById('splash-text');
