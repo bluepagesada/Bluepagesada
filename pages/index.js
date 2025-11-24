@@ -15,19 +15,18 @@ export default function Home() {
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 220'><defs><linearGradient id='bluegrad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%230033AD'/><stop offset='100%' stop-color='%2300D4FF'/></linearGradient></defs><g filter='url(%23shadow)'><path d='M110 20 L200 80 L200 140 L110 200 L20 140 L20 80 Z' fill='url(%23bluegrad)' stroke='%23002D5A' stroke-width='6'/><path d='M110 60 L170 100 L170 120 L110 160 L50 120 L50 100 Z' fill='white'/><path d='M110 80 L145 110 L110 140 L75 110 Z' fill='%23002D5A'/></g><defs><filter id='shadow' x='-50%' y='-50%' width='200%' height='200%'><feGaussianBlur in='SourceAlpha' stdDeviation='10'/><feOffset dx='0' dy='15' result='offsetblur'/><feFlood flood-color='rgba(0,0,0,0.6)'/><feComposite in2='offsetblur' operator='in'/><feMerge><feMergeNode/><feMergeNode in='SourceGraphic'/></feMerge></filter></defs></svg>" />
       </Head>
       <body className=" d-flex flex-column min-vh-100">
-
-        <!-- TOP RIGHT THEME TOGGLE -->
+        {/* TOP RIGHT THEME TOGGLE */}
         <div className="position-fixed top-0 end-0 p-3 z-3">
             <button id="themeToggle" className="btn btn-outline-light rounded-circle p-3 shadow-lg">
                 <i className="bi bi-sun-fill"></i>
             </button>
         </div>
-        <!-- HERO -->
+        {/* HERO */}
         <section className="hero text-center text-white d-flex align-items-center min-vh-100">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-lg-10 col-xxl-8">
-                        <!-- Logo -->
+                        {/* Logo */}
                         <div className="text-center mb-4">
                             <svg width="220" height="220" viewBox="0 0 220 220" className="hero-logo" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
@@ -74,7 +73,7 @@ export default function Home() {
                 </div>
             </div>
         </section>
-        <!-- MAIN NAV TABS -->
+        {/* MAIN NAV TABS */}
         <div className="container my-5">
             <ul className="nav nav-tabs nav-fill border-0 shadow-sm rounded" id="mainTabs" role="tablist">
                 <li className="nav-item" role="presentation">
@@ -94,9 +93,9 @@ export default function Home() {
                 </li>
             </ul>
         </div>
-        <!-- TAB CONTENT -->
+        {/* TAB CONTENT */}
         <div className="tab-content" id="mainTabContent">
-            <!-- HOME TAB -->
+            {/* HOME TAB */}
             <div className="tab-pane fade show active" id="home" role="tabpanel">
                 <div className="container py-5">
                     <div className="row justify-content-center text-center">
@@ -135,10 +134,10 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <!-- PROJECTS TAB -->
+            {/* PROJECTS TAB */}
             <div className="tab-pane fade" id="projectsTab" role="tabpanel">
                 <div className="container py-4">
-                    <!-- Search + Sort -->
+                    {/* Search + Sort */}
                     <div className="row g-3 align-items-center mb-5">
                         <div className="col-lg-8">
                             <input type="text" id="searchInput" className="form-control form-control-lg rounded-pill shadow-sm" placeholder="Search all projects..." autoComplete="off" />
@@ -151,7 +150,7 @@ export default function Home() {
                             </select>
                         </div>
                     </div>
-                    <!-- Category Pills -->
+                    {/* Category Pills */}
                     <ul className="nav nav-pills justify-content-center gap-3 mb-5 flex-wrap" id="categoryTabs">
                         <li className="nav-item"><a className="nav-link active" data-cat="all">All</a></li>
                         <li className="nav-item"><a className="nav-link" data-cat="depin">DePIN & Connectivity</a></li>
@@ -165,8 +164,14 @@ export default function Home() {
                         <li className="nav-item"><a className="nav-link" data-cat="gaming">Gaming & Metaverse</a></li>
                         <li className="nav-item"><a className="nav-link" data-cat="other">Other</a></li>
                     </ul>
-                    <!-- Loading Skeleton – 12 full placeholder cards -->
+                    {/* Loading Skeleton – 12 full placeholder cards */}
                     <div id="loadingSkeleton" className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                         <div className="col"><div className="card h-100"><div className="card-body placeholder-glow"><div className="d-flex align-items-start mb-3"><div className="bg-secondary rounded me-3" style={{width: '64px', height: '64px'}}></div><div><span className="placeholder col-8"></span><br/><span className="placeholder col-6"></span></div></div><span className="placeholder col-12"></span><br/><span className="placeholder col-11"></span><br/><span className="placeholder col-10"></span><br/><span className="placeholder col-7"></span></div></div></div>
                         <div className="col"><div className="card h-100"><div className="card-body placeholder-glow"><div className="d-flex align-items-start mb-3"><div className="bg-secondary rounded me-3" style={{width: '64px', height: '64px'}}></div><div><span className="placeholder col-8"></span><br/><span className="placeholder col-6"></span></div></div><span className="placeholder col-12"></span><br/><span className="placeholder col-11"></span><br/><span className="placeholder col-10"></span><br/><span className="placeholder col-7"></span></div></div></div>
-                        <div className="col"><div className="card h-100"><div className="card-body placeholder-glow"><div className="d-flex align-items-start mb
+                        <div className="col"><div className="card h-100"><div className="card-body placeholder-glow"><div className="d-flex align-items-start mb-3"><div className="bg-secondary rounded me-3" style={{width: '64px', height: '64px'}}></div><div><span className="placeholder col-8"></span><br/><span className="placeholder col-6"></span></div></div><span className="placeholder col-12"></span><br/><span className="placeholder col-11"></span><br/><span className="placeholder col-10"></span><br/><span className="placeholder col-7"></span></div></div></div>
+                        <div className="col"><div className="card h-100"><div className="card-body placeholder-glow"><div className="d-flex align-items-start mb-3"><div className="bg-secondary rounded me-3" style={{width: '64px', height: '64px'}}></div><div><span className="placeholder col-8"></span><br/><span className="placeholder col-6"></span></div></div><span className="placeholder col-12"></span><br/><span className="placeholder col-11"></span><br/><span className="placeholder col-10"></span><br/><span className="placeholder col-7"></span></div></div></div>
+                        <div className="col"><div className="card h-100"><div className="card-body placeholder-glow"><div className="d-flex align-items-start mb-3"><div className="bg-secondary rounded me-3" style={{width: '64px', height: '64px'}}></div><div><span className="placeholder col-8"></span><br/><span className="placeholder col-6"></span></div></div><span className="placeholder col-12"></span><br/><span className="placeholder col-11"></span><br/><span className="placeholder col-10"></span><br/><span className="placeholder col-7"></span></div></div></div>
+                        <div className="col"><div className="card h-100"><div className="card-body placeholder-glow"><div className="d-flex align-items-start mb-3"><div className="bg-secondary rounded me-3" style={{width: '64px', height: '64px'}}></div><div><span className="placeholder col-8"></span><br/><span className="placeholder col-6"></span></div></div><span className="placeholder col-12"></span><br/><span className="placeholder col-11"></span><br/><span className="placeholder col-10"></span><br/><span className="placeholder col-7"></span></div></div></div>
+                        <div className="col"><div className="card h-100"><div className="card-body placeholder-glow"><div className="d-flex align-items-start mb-3"><div className="bg-secondary rounded me-3" style={{width: '64px', height: '64px'}}></div><div><span className="placeholder col-8"></span><br/><span className="placeholder col-6"></span></div></div><span className="placeholder col-12"></span><br/><span className="placeholder col-11"></span><br/><span className="placeholder col-10"></span><br/><span className="placeholder col-7"></span></div></div></div>
+                        <div className="col"><div className="card h-100"><div className="card-body placeholder-glow"><div className="d-flex align-items-start mb-3"><div className="bg-secondary rounded me-3" style={{width: '64px', height: '64px'}}></div><div><span className="placeholder col-8"></span><br/><span className="placeholder col-6"></span></div></div><span className="placeholder col-12"></span><br/><span className="placeholder col-11"></span><br/><span className="placeholder col-10"></span><br/><span className="placeholder col-7"></span></div></div></div>
+                        <div className="col"><div className="card h-100"><div className="card-body placeholder-glow"><div className="d-flex align-items-start mb-
