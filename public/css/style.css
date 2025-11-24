@@ -265,5 +265,23 @@ body {
   .badge-revenue { background: #28a745 !important; color: white; }
 .badge-enterprise { background: #007bff !important; color: white; }
 .badge-gov { background: #6f42c1 !important; color: white; }
+  /** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  },
+  eslint: {
+    ignoreDuringBuilds: true
+  },
+  typescript: {
+    ignoreBuildErrors: true
+  },
+  assetPrefix: './', // Ensures /style.css resolves in /out/ for static serve
+  basePath: '' // No subdir; root deploy
+};
+
+module.exports = nextConfig;
 
 }
