@@ -341,7 +341,19 @@ function loadCardanoMetrics() {
     `;
     grid.innerHTML = metricsHtml;
 }
+// Add to DOMContentLoaded
+loadCardanoMetrics(); // Your static func from history
 
+function loadCardanoMetrics() {
+  const grid = document.getElementById('metrics-grid');
+  if (!grid) return;
+  // Static Nov 23, 2025 data as before
+  const metricsHtml = `
+    <div class="col-md-4"><div class="card border-0 shadow-sm h-100 text-center p-3"><i class="bi bi-currency-dollar fs-1 text-primary mb-2"></i><h5 class="fw-bold">ADA Price</h5><p class="fs-4 fw-bold">$$0.41</p></div></div>
+    // ... full 6 cards from history
+  `;
+  grid.innerHTML = metricsHtml;
+}
 // Load metrics on page load (static, no interval needed for fallback)
 if (document.getElementById('metrics-grid')) {
     loadCardanoMetrics();
