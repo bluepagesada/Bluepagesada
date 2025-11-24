@@ -312,3 +312,86 @@ fetch('https://api.countapi.xyz/hit/bluepagesada.github.io/Bluepagesada')
         const el = document.getElementById('visitor-count');
         if (el) el.textContent = 'many';
     });
+
+// Live Cardano Metrics Tracker
+function loadCardanoMetrics() {
+    const grid = document.getElementById('metrics-grid');
+    if (!grid) return;
+
+    // Show loading state
+    grid.innerHTML = '<div class="col-12 text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+
+    // Fetch ADA price/market from CoinGecko
+    fetch('https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true')
+        .then(r => r.json())
+        .then(data => {
+            const ada = data.cardano;
+            const changeClass = ada.usd_24h_change > 0 ? 'text-success' : 'text-danger';
+
+            // Fetch TVL from DefiLlama
+            fetch('https://api.llama.fi/tvl/cardano')
+                .then(r => r.json())
+                .then(tvlData => {
+                    const tvl = tvlData || 0;
+
+                    // Static staking % (update via API if needed; current 2025 avg ~71%)
+                    const stakingPercent = 71.2;
+
+                    // Static tx count (use Blockfrost for live; placeholder for now)
+                    const tx24h = '1.2M';
+
+                    // Build cards
+                    const metricsHtml = `
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                                <i class="bi bi-currency-dollar fs-1 text-primary mb-2"></i>
+                                <h5 class="card-title fw-bold">ADA Price</h5>
+                                <p class="card-text fs-4 fw-bold">$${ada.usd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                                <i class="bi bi-graph-up-arrow fs-1 ${changeClass} mb-2"></i>
+                                <h5 class="card-title fw-bold">24h Change</h5>
+                                <p class="card-text fs-4 fw-bold ${changeClass}">${ada.usd_24h_change.toFixed(2)}%</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                                <i class="bi bi-building fs-1 text-primary mb-2"></i>
+                                <h5 class="card-title fw-bold">Market Cap</h5>
+                                <p class="card-text fs-4 fw-bold">$${ada.usd_market_cap.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                                <i class="bi bi-bar-chart-line fs-1 text-primary mb-2"></i>
+                                <h5 class="card-title fw-bold">24h Volume</h5>
+                                <p class="card-text fs-4 fw-bold">$${ada.usd_24h_vol.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                                <i class="bi bi-pie-chart fs-1 text-success mb-2"></i>
+                                <h5 class="card-title fw-bold">DeFi TVL</h5>
+                                <p class="card-text fs-4 fw-bold">$${tvl.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                                <i class="bi bi-shield-check fs-1 text-success mb-2"></i>
+                                <h5 class="card-title fw-bold">Staking %</h5>
+                                <p class="card-text fs-4 fw-bold">${stakingPercent}%</p>
+                            </div>
+                        </div>
+                    `;
+                    grid.innerHTML = metricsHtml;
+                })
+                .catch(() => grid.innerHTML = '<div class="col-12 text-center text-muted">Metrics temporarily unavailable</div>');
+        })
+        .catch(() => grid.innerHTML = '<div class="col-12 text-center text-muted">Metrics temporarily unavailable</div>');
+}
+
+// Load on page load, update every 30s
+loadCardanoMetrics();
+setInterval(loadCardanoMetrics, 30000);
