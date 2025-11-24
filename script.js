@@ -321,26 +321,30 @@ function loadCardanoMetrics() {
     // Show loading state
     grid.innerHTML = '<div class="col-12 text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
 
-    // Fetch ADA price/market from CoinGecko
-    fetch('https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true')
+    // CORS proxy for CoinGecko
+    const coingeckoProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true');
+    fetch(coingeckoProxy)
         .then(r => r.json())
         .then(data => {
-            const ada = data.cardano;
+            const adaData = JSON.parse(data.contents);
+            const ada = adaData.cardano;
             const changeClass = ada.usd_24h_change > 0 ? 'text-success' : 'text-danger';
 
-            // Fetch TVL from DefiLlama
-            fetch('https://api.llama.fi/tvl/cardano')
+            // CORS proxy for DefiLlama
+            const defillamaProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.llama.fi/tvl/cardano');
+            fetch(defillamaProxy)
                 .then(r => r.json())
-                .then(tvlData => {
+                .then(data => {
+                    const tvlData = JSON.parse(data.contents);
                     const tvl = tvlData || 0;
 
-                    // Static staking % (update via API if needed; current 2025 avg ~71%)
+                    // Staking % (static for now, ~71% in 2025)
                     const stakingPercent = 71.2;
 
-                    // Static tx count (use Blockfrost for live; placeholder for now)
+                    // Tx 24h (static placeholder, use Blockfrost for live if needed)
                     const tx24h = '1.2M';
 
-                    // Build cards
+                    // Build cards HTML
                     const metricsHtml = `
                         <div class="col-md-4 col-sm-6">
                             <div class="card border-0 shadow-sm h-100 text-center p-3">
