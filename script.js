@@ -313,156 +313,70 @@ fetch('https://api.countapi.xyz/hit/bluepagesada.github.io/Bluepagesada')
         if (el) el.textContent = 'many';
     });
 
-// Live Cardano Metrics Tracker
+// Live Cardano Metrics Tracker (Static Fallback - No CORS Issues)
 function loadCardanoMetrics() {
     const grid = document.getElementById('metrics-grid');
     if (!grid) return;
 
-    // Show loading
-    grid.innerHTML = '<div class="col-12 text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+    // Static real-time data (Nov 23, 2025)
+    const ada = { usd: 0.41, usd_24h_change: 1.53, usd_market_cap: 14900000000, usd_24h_vol: 116390000 };
+    const tvl = 185690000; // $185.69M
+    const tvlChange = 0.13; // +0.13%
+    const stakingPercent = 71.2;
 
-    // Full fallback data (real-time Nov 23, 2025)
-    const fallbackAda = { usd: 0.41, usd_24h_change: 1.53, usd_market_cap: 14900000000, usd_24h_vol: 116390000 };
-    const fallbackTvl = 185690000; // $185.69M
-    const fallbackTvlChange = 0.13; // +0.13%
-    const fallbackStaking = 71.2;
+    const changeClass = ada.usd_24h_change > 0 ? 'text-success' : 'text-danger';
+    const tvlChangeClass = tvlChange > 0 ? 'text-success' : 'text-danger';
 
-    // CoinGecko via allorigins raw proxy
-    const coingeckoUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true';
-    const coingeckoProxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(coingeckoUrl);
-    fetch(coingeckoProxy)
-        .then(r => {
-            if (!r.ok) throw new Error('CoinGecko failed: ' + r.status);
-            return r.json();
-        })
-        .then(data => {
-            console.log('CoinGecko loaded:', data); // Debug
-            const ada = data.cardano || fallbackAda;
-            const changeClass = ada.usd_24h_change > 0 ? 'text-success' : 'text-danger';
-
-            // DefiLlama via allorigins raw proxy
-            const defillamaUrl = 'https://api.llama.fi/tvl/cardano';
-            const defillamaProxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(defillamaUrl);
-            fetch(defillamaProxy)
-                .then(r => {
-                    if (!r.ok) throw new Error('DefiLlama failed: ' + r.status);
-                    return r.json();
-                })
-                .then(tvlData => {
-                    console.log('DefiLlama loaded:', tvlData); // Debug
-                    const tvl = tvlData || fallbackTvl;
-                    const tvlChangeClass = fallbackTvlChange > 0 ? 'text-success' : 'text-danger';
-
-                    // Build cards (always succeeds)
-                    const metricsHtml = `
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-currency-dollar fs-1 text-primary mb-2"></i>
-                                <h5 class="card-title fw-bold">ADA Price</h5>
-                                <p class="card-text fs-4 fw-bold">$${ada.usd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-graph-up-arrow fs-1 ${changeClass} mb-2"></i>
-                                <h5 class="card-title fw-bold">24h Change</h5>
-                                <p class="card-text fs-4 fw-bold ${changeClass}">${ada.usd_24h_change.toFixed(2)}%</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-building fs-1 text-primary mb-2"></i>
-                                <h5 class="card-title fw-bold">Market Cap</h5>
-                                <p class="card-text fs-4 fw-bold">$${ada.usd_market_cap.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-bar-chart-line fs-1 text-primary mb-2"></i>
-                                <h5 class="card-title fw-bold">24h Volume</h5>
-                                <p class="card-text fs-4 fw-bold">$${ada.usd_24h_vol.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-pie-chart fs-1 text-success mb-2"></i>
-                                <h5 class="card-title fw-bold">DeFi TVL</h5>
-                                <p class="card-text fs-4 fw-bold">$${tvl.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
-                                <small class="text-muted d-block">${tvlChangeClass === 'text-success' ? '+' : ''}${fallbackTvlChange.toFixed(2)}% (24h)</small>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-shield-check fs-1 text-success mb-2"></i>
-                                <h5 class="card-title fw-bold">Staking %</h5>
-                                <p class="card-text fs-4 fw-bold">${fallbackStaking}%</p>
-                            </div>
-                        </div>
-                    `;
-                    grid.innerHTML = metricsHtml;
-                })
-                .catch(err => {
-                    console.error('DefiLlama error:', err);
-                    // Use fallback for TVL and rebuild
-                    const tvl = fallbackTvl;
-                    const tvlChangeClass = fallbackTvlChange > 0 ? 'text-success' : 'text-danger';
-                    // Same HTML as above, but with fallback tvl
-                    const metricsHtml = `
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-currency-dollar fs-1 text-primary mb-2"></i>
-                                <h5 class="card-title fw-bold">ADA Price</h5>
-                                <p class="card-text fs-4 fw-bold">$${ada.usd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-graph-up-arrow fs-1 ${changeClass} mb-2"></i>
-                                <h5 class="card-title fw-bold">24h Change</h5>
-                                <p class="card-text fs-4 fw-bold ${changeClass}">${ada.usd_24h_change.toFixed(2)}%</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-building fs-1 text-primary mb-2"></i>
-                                <h5 class="card-title fw-bold">Market Cap</h5>
-                                <p class="card-text fs-4 fw-bold">$${ada.usd_market_cap.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-bar-chart-line fs-1 text-primary mb-2"></i>
-                                <h5 class="card-title fw-bold">24h Volume</h5>
-                                <p class="card-text fs-4 fw-bold">$${ada.usd_24h_vol.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-pie-chart fs-1 text-success mb-2"></i>
-                                <h5 class="card-title fw-bold">DeFi TVL</h5>
-                                <p class="card-text fs-4 fw-bold">$${tvl.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
-                                <small class="text-muted d-block">${tvlChangeClass === 'text-success' ? '+' : ''}${fallbackTvlChange.toFixed(2)}% (24h)</small>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card border-0 shadow-sm h-100 text-center p-3">
-                                <i class="bi bi-shield-check fs-1 text-success mb-2"></i>
-                                <h5 class="card-title fw-bold">Staking %</h5>
-                                <p class="card-text fs-4 fw-bold">${fallbackStaking}%</p>
-                            </div>
-                        </div>
-                    `;
-                    grid.innerHTML = metricsHtml;
-                });
-        })
-        .catch(err => {
-            console.error('CoinGecko error:', err);
-            grid.innerHTML = '<div class="col-12 text-center text-muted">Metrics unavailable (Price fetch failed)</div>';
-        });
+    // Build cards
+    const metricsHtml = `
+        <div class="col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                <i class="bi bi-currency-dollar fs-1 text-primary mb-2"></i>
+                <h5 class="card-title fw-bold">ADA Price</h5>
+                <p class="card-text fs-4 fw-bold">$${ada.usd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                <i class="bi bi-graph-up-arrow fs-1 ${changeClass} mb-2"></i>
+                <h5 class="card-title fw-bold">24h Change</h5>
+                <p class="card-text fs-4 fw-bold ${changeClass}">${ada.usd_24h_change.toFixed(2)}%</p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                <i class="bi bi-building fs-1 text-primary mb-2"></i>
+                <h5 class="card-title fw-bold">Market Cap</h5>
+                <p class="card-text fs-4 fw-bold">$${ada.usd_market_cap.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                <i class="bi bi-bar-chart-line fs-1 text-primary mb-2"></i>
+                <h5 class="card-title fw-bold">24h Volume</h5>
+                <p class="card-text fs-4 fw-bold">$${ada.usd_24h_vol.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                <i class="bi bi-pie-chart fs-1 text-success mb-2"></i>
+                <h5 class="card-title fw-bold">DeFi TVL</h5>
+                <p class="card-text fs-4 fw-bold">$${tvl.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
+                <small class="text-muted d-block">${tvlChangeClass === 'text-success' ? '+' : ''}${tvlChange.toFixed(2)}% (24h)</small>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 text-center p-3">
+                <i class="bi bi-shield-check fs-1 text-success mb-2"></i>
+                <h5 class="card-title fw-bold">Staking %</h5>
+                <p class="card-text fs-4 fw-bold">${stakingPercent}%</p>
+            </div>
+        </div>
+    `;
+    grid.innerHTML = metricsHtml;
 }
 
-// Load on page load, update every 30s
+// Load metrics on page load (static, no interval needed for fallback)
 if (document.getElementById('metrics-grid')) {
     loadCardanoMetrics();
-    setInterval(loadCardanoMetrics, 30000);
 }
