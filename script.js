@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         splashEl.textContent = splashes[Math.floor(Math.random() * splashes.length)];
     }
 
-    fetch('projects.json')
+    fetch('/public/data/projects.json')
         .then(r => {
             if (!r.ok) throw new Error('projects.json not found');
             return r.json();
