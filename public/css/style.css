@@ -1,6 +1,3 @@
-.badge-revenue { background: #28a745 !important; color: white; }
-.badge-enterprise { background: #007bff !important; color: white; }
-.badge-gov { background: #6f42c1 !important; color: white; }
 
 :root {
   --blue: #002D72;
@@ -265,4 +262,8 @@ body {
   padding: 0.2rem 0.5rem;
   font-size: 0.75rem;
 }
+  .badge-revenue { background: #28a745 !important; color: white; }
+.badge-enterprise { background: #007bff !important; color: white; }
+.badge-gov { background: #6f42c1 !important; color: white; }
+
 }
